@@ -1,4 +1,6 @@
 <?php
+$openLayersVersion = '2.12';
+
 require 'jsmin-1.1.1.php';
 
 // Lit la liste des includes
@@ -72,9 +74,9 @@ foreach ($files AS $fn => $fs) {
 }
 
 $elapsed = time () - $deb;
-echo "<b>OpenLayers.js généré en $elapsed s " .date('r') ."</b><br>\nModifications par rapport à OpenLayers-2.12:<hr>$log";
+echo "<b>OpenLayers.js généré en $elapsed s " .date('r') ."</b><br>\nModifications par rapport à OpenLayers-$openLayersVersion:<hr>$log";
 $fpl = fopen ('build.log.html', 'w');
 fwrite ($fpl, "<b>Openlayers.js généré sur {$_SERVER['SERVER_NAME']} le " .date('r') 
-	."</b><br>\nModifications par rapport à OpenLayers-2.11-rc4:<hr>\n$log");
+	."</b><br>\nModifications par rapport à OpenLayers-$openLayersVersion:<hr>\n$log");
 fclose ($fpl);
 ?>
