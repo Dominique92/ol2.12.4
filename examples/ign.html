@@ -8,15 +8,17 @@
     <link rel="stylesheet" href="../theme/default/style.css" type="text/css">
     <link rel="stylesheet" href="style.css" type="text/css">
     <script src="../lib/OpenLayers.js"></script>
+    <script src="../lib/OpenLayers/Layer/IGN.js"></script>
     <script type="text/javascript">
         var map, layer;
         function init(){
             map = new OpenLayers.Map( 'map');
 			map.addControl(new OpenLayers.Control.LayerSwitcher());
             map.addLayers([
-				new OpenLayers.Layer.IGN                 ('IGN',       'exhcda64lisxsptm188n4at9'),
-				new OpenLayers.Layer.IGN.Photo           ('IGN photo', 'exhcda64lisxsptm188n4at9'),
+				new OpenLayers.Layer.IGN                 ('IGN',          'exhcda64lisxsptm188n4at9'), // Clé pour localhost
+				new OpenLayers.Layer.IGN.Photo           ('IGN photo',    'exhcda64lisxsptm188n4at9'), // 
 				new OpenLayers.Layer.IGN.Cadastre        ('IGN Cadastre', 'exhcda64lisxsptm188n4at9')
+				// Clé V3 production sur: http://pro.ign.fr/api-web => Service en ligne => L'API du Géoportail pour le web => S'ABONNER
 			]);
             map.setCenter(
                 new OpenLayers.LonLat(2, 46.5).transform(
