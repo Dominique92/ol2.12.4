@@ -49,7 +49,7 @@
 						
 						// Automatiquement autorisé sur //localhost
 						// Demande pour autoriser le domaine à accéder aux données:
-						// http://www.swisstopo.admin.ch/internet/swisstopo/fr/home/products/services/web_services/webaccess.html => Accès au formulaire de commande
+						// http://swisstopo.admin.ch/internet/swisstopo/fr/home/products/services/web_services/webaccess.html => Accès au formulaire de commande
 						new OpenLayers.Layer.SwissTopo           ('SwissTopo'),
 						new OpenLayers.Layer.SwissTopo.Siegfried ('Swiss 1949'),
 						new OpenLayers.Layer.SwissTopo.Dufour    ('Swiss 1864'),
@@ -59,7 +59,7 @@
 						new OpenLayers.Layer.IGM                 ('Italia'),
 						
 						// chemineur.fr : CBE047F823B5E83CE0405F0ACA6042AB
-						new OpenLayers.Layer.OS                  ('Great Britain', 'CBE047F823B5E83CE0405F0ACA6042AB') // UK Ordnance Survey Layer
+						new OpenLayers.Layer.OS                  ('Great Britain', 'CBE047F823B5E83CE0405F0ACA6042AB') // UK Ordonance Survey Layer
 					]
 				});
 /*
@@ -84,13 +84,13 @@
 						displayInLayerSwitcher: false
 					}),
 					new OpenLayers.Layer.GMLSLD ('WRI', { // Une couche au format GML et sa feuille de style SDL avec des actions de survol et de click
-						urlGML: OpenLayers._getScriptLocation() + 'proxy.php?url=http://www.refuges.info/exportations/exportations.php?format=gml',
+						urlGML: OpenLayers._getScriptLocation() + 'proxy.php?url=http://refuges.info/exportations/exportations.php?format=gml',
 						projection: 'EPSG:4326',
 						urlSLD: OpenLayers._getScriptLocation() + 'refuges-info-sld.xml',
 						styleName: 'Points'
 					}),
 					new OpenLayers.Layer.GMLSLD ('Massifs', {	
-						urlGML: OpenLayers._getScriptLocation() + 'proxy.php?url=http://www.refuges.info/exportations/massifs-gml.php',
+						urlGML: OpenLayers._getScriptLocation() + 'proxy.php?url=http://refuges.info/exportations/massifs-gml.php',
 						projection: 'EPSG:4326', // Le GML est fourni en degminsec
 						urlSLD: OpenLayers._getScriptLocation() + 'refuges-info-sld.xml',
 						styleName: 'Massifs'
@@ -130,7 +130,7 @@
 						new OpenLayers.Layer.SwissTopo           ('SwissTopo'),
 						// Les couches superposées
 						new OpenLayers.Layer.GMLSLD ('WRI', {	
-							urlGML: OpenLayers._getScriptLocation() + 'proxy.php?url=http://www.refuges.info/exportations/exportations.php?format=gml',
+							urlGML: OpenLayers._getScriptLocation() + 'proxy.php?url=http://refuges.info/exportations/exportations.php?format=gml',
 							projection: 'EPSG:4326',
 							urlSLD: OpenLayers._getScriptLocation() + 'refuges-info-sld.xml',
 							styleName: 'Points'

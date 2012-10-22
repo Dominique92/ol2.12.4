@@ -4,41 +4,36 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <title>OpenLayers Basic SwissTopo Example</title>
+    <title>OpenLayers Basic Ordonance Survey Example</title>
     <link rel="stylesheet" href="../theme/default/style.css" type="text/css">
     <link rel="stylesheet" href="style.css" type="text/css">
     <script src="http://svn.osgeo.org/metacrs/proj4js/trunk/lib/proj4js-combined.js"></script>
     <script src="../lib/OpenLayers.js"></script>
-    <script src="../lib/OpenLayers/Layer/SwissTopo.js"></script>
+    <script src="../lib/OpenLayers/Layer/OS.js"></script>
     <script type="text/javascript">
         var map, layer;
         function init(){
             map = new OpenLayers.Map( 'map');
-			map.addControl(new OpenLayers.Control.LayerSwitcher());
-            map.addLayers([
-				new OpenLayers.Layer.SwissTopo           ('SwissTopo'),
-				new OpenLayers.Layer.SwissTopo.Siegfried ('Swiss 1949'),
-				new OpenLayers.Layer.SwissTopo.Dufour    ('Swiss 1864'),
-				new OpenLayers.Layer.SwissTopo.Photo     ('Swiss photo')
-			]);
+            map.addLayer(new OpenLayers.Layer.OS ('Great Britain', 'CBE047F823B5E83CE0405F0ACA6042AB')); // key for localhost
+			// For a production key, you need to register to: https://openspace.ordnancesurvey.co.uk/osmapapi/register.do
             map.setCenter(
-                new OpenLayers.LonLat(8.3, 46.8).transform(
+                new OpenLayers.LonLat(-2, 52).transform(
                     new OpenLayers.Projection("EPSG:4326"),
                     map.getProjectionObject()
-                ), 7
+                ), 1
             );    
         }
     </script>
   </head>
   <body onload="init()">
-    <h1 id="title">SwissTopo (Switzerland)</h1>
+    <h1 id="title">Ordonance Survey footpath maps (Great Britain)</h1>
 
-    <div id="shortdesc">Show maps of SwissTopo (Switzerland)</div>
+    <div id="shortdesc">Show maps of Ordonance Survey (National mapping agency of Great Britain)</div>
 
     <div id="map" class="smallmap"></div>
 
     <div id="docs">
-        <p>This example shows a very simple SwissTopo layout with minimal controls.</p> 
+        <p>This example shows a very simple Ordonance Survey layout with minimal controls.</p> 
     </div>
   </body>
 </html>
