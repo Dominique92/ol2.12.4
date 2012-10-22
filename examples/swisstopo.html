@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>OpenLayers Basic SwissTopo Example</title>
+    <link rel="stylesheet" href="../theme/default/style.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script src="../lib/OpenLayers.js"></script>
+    <script src="../lib/OpenLayers/Layer/SwissTopo.js"></script>
+    <script src="http://svn.osgeo.org/metacrs/proj4js/trunk/lib/proj4js-combined.js"></script>
+    <script type="text/javascript">
+        var map, layer;
+        function init(){
+            map = new OpenLayers.Map( 'map');
+			map.addControl(new OpenLayers.Control.LayerSwitcher());
+            map.addLayers([
+				new OpenLayers.Layer.SwissTopo           ('SwissTopo'),
+				new OpenLayers.Layer.SwissTopo.Siegfried ('Swiss 1949'),
+				new OpenLayers.Layer.SwissTopo.Dufour    ('Swiss 1864'),
+				new OpenLayers.Layer.SwissTopo.Photo     ('Swiss photo')
+			]);
+            map.setCenter(
+                new OpenLayers.LonLat(8.3, 46.8).transform(
+                    new OpenLayers.Projection("EPSG:4326"),
+                    map.getProjectionObject()
+                ), 7
+            );    
+        }
+    </script>
+  </head>
+  <body onload="init()">
+    <h1 id="title">SwissTopo (Switzerland)</h1>
+
+    <div id="shortdesc">Show maps of SwissTopo (Switzerland)</div>
+
+    <div id="map" class="smallmap"></div>
+
+    <div id="docs">
+        <p>This example shows a very simple SwissTopo layout with minimal controls.</p> 
+    </div>
+  </body>
+</html>
