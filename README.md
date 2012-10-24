@@ -2,6 +2,11 @@ ol2.12.4
 /*************************************************************************************************************************************/
 NOUVELLES FONCTIONNALITES
 
+
+A VOIR
+http://trac.osgeo.org/openlayers/attachment/ticket/1882/DeleteFeature.js
+http://trac.osgeo.org/openlayers/ticket/1249 Baselayers multiprojections
+
 /*************************************************************************************************************************************/
 RESTRICTIONS
 L'éditeur ne fonctionne pas sous IE
