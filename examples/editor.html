@@ -11,7 +11,7 @@
     <script src="../lib/OpenLayers/Layer/Editor.js"></script>
     <script src="../lib/OpenLayers/Control/CutFeature.js"></script>
     <script src="../lib/OpenLayers/Control/DeleteFeature.js"></script>
-    <script src="../lib/OpenLayers/Control/DrawFeatureExtended.js"></script>
+    <script src="../lib/OpenLayers/Control/DrawFeaturePath.js"></script>
     <script src="../lib/OpenLayers/Control/SaveFeature.js"></script>
     <script type="text/javascript">
         var map, osm, editor;
@@ -26,6 +26,17 @@
 					format: new OpenLayers.Format.GPX ()
 				}
 			);
+			editor.addControls ([
+				new OpenLayers.Control.VisuGPXViewFeature (),
+				new OpenLayers.Control.SaveFeature (),
+				new OpenLayers.Control.DownloadFeature (),
+				new OpenLayers.Control.LoadFeature (),
+				new OpenLayers.Control.DeleteFeature   (editor),
+				new OpenLayers.Control.CutFeature      (editor),
+				new OpenLayers.Control.ModifyFeature   (editor),
+				new OpenLayers.Control.DrawFeaturePath (editor),
+				new OpenLayers.Control.Navigation ()
+			]);
             map.addLayers([osm, editor]);
 
             map.setCenter(new OpenLayers.LonLat(10, 49).transform(

@@ -1,6 +1,7 @@
 <!--DCM++ © Dominique Cavailhez 2012-->
 <html>
 	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 		<script src="http://maps.google.com/maps/api/js?v=3&amp;sensor=false"></script>
 		<script type="text/javascript" src="../../lib/OpenLayers.js"></script>
 		<script type="text/javascript">
@@ -43,8 +44,8 @@
 						// localhost    : exhcda64lisxsptm188n4at9
 						// refuges.info : ev2w14tv2ez4wpypux2ael39
 						// chemineur.fr : y07s87qyij0i6yhj8nzi66ww
-						new OpenLayers.Layer.IGN                 ('IGN',       'exhcda64lisxsptm188n4at9'),
-						new OpenLayers.Layer.IGN.Photo           ('IGN photo', 'exhcda64lisxsptm188n4at9'),
+						new OpenLayers.Layer.IGN                 ('IGN',          'exhcda64lisxsptm188n4at9'),
+						new OpenLayers.Layer.IGN.Photo           ('IGN photo',    'exhcda64lisxsptm188n4at9'),
 						new OpenLayers.Layer.IGN.Cadastre        ('IGN Cadastre', 'exhcda64lisxsptm188n4at9'),
 						
 						// Automatiquement autorisé sur //localhost
@@ -55,7 +56,7 @@
 						new OpenLayers.Layer.SwissTopo.Dufour    ('Swiss 1864'),
 						new OpenLayers.Layer.SwissTopo.Photo     ('Swiss photo'),
 						
-						new OpenLayers.Layer.IDEE                ('España'), 
+						new OpenLayers.Layer.IDEE                ('EspaÃ±a'), 
 						new OpenLayers.Layer.IGM                 ('Italia'),
 						
 						// chemineur.fr : CBE047F823B5E83CE0405F0ACA6042AB
@@ -84,13 +85,13 @@
 						displayInLayerSwitcher: false
 					}),
 					new OpenLayers.Layer.GMLSLD ('WRI', { // Une couche au format GML et sa feuille de style SDL avec des actions de survol et de click
-						urlGML: OpenLayers._getScriptLocation() + 'proxy.php?url=http://refuges.info/exportations/exportations.php?format=gml',
+						urlGML: OpenLayers._getScriptLocation() + 'proxy.php?url=http://www.refuges.info/exportations/exportations.php?format=gml',
 						projection: 'EPSG:4326',
 						urlSLD: OpenLayers._getScriptLocation() + 'refuges-info-sld.xml',
 						styleName: 'Points'
 					}),
 					new OpenLayers.Layer.GMLSLD ('Massifs', {	
-						urlGML: OpenLayers._getScriptLocation() + 'proxy.php?url=http://refuges.info/exportations/massifs-gml.php',
+						urlGML: OpenLayers._getScriptLocation() + 'proxy.php?url=http://www.refuges.info/exportations/massifs-gml.php',
 						projection: 'EPSG:4326', // Le GML est fourni en degminsec
 						urlSLD: OpenLayers._getScriptLocation() + 'refuges-info-sld.xml',
 						styleName: 'Massifs'
@@ -126,11 +127,11 @@
 						new OpenLayers.Layer.Google.Photo        ('Google photo',  {visibility: false}),
 						new OpenLayers.Layer.OSM                 ('OSM'),
 						new OpenLayers.Layer.WRI                 ('map.refuges.info'),
-						new OpenLayers.Layer.IGN                 ('IGN',       'exhcda64lisxsptm188n4at9'),
+						new OpenLayers.Layer.IGN                 ('IGN', 'exhcda64lisxsptm188n4at9'),
 						new OpenLayers.Layer.SwissTopo           ('SwissTopo'),
 						// Les couches superposées
 						new OpenLayers.Layer.GMLSLD ('WRI', {	
-							urlGML: OpenLayers._getScriptLocation() + 'proxy.php?url=http://refuges.info/exportations/exportations.php?format=gml',
+							urlGML: OpenLayers._getScriptLocation() + 'proxy.php?url=http://www.refuges.info/exportations/exportations.php?format=gml',
 							projection: 'EPSG:4326',
 							urlSLD: OpenLayers._getScriptLocation() + 'refuges-info-sld.xml',
 							styleName: 'Points'
@@ -140,12 +141,23 @@
 			}
 			function add_edit () {
 				editeur = new OpenLayers.Layer.Editor (
-					'Editor', 
+					'Editeur', 
 					'serveur_gml.php?trace=123&', // Source GML permettant la lecture/ecriture
 					{
 						format: new OpenLayers.Format.GPX ()
 					}
 				);
+				editeur.addControls ([ // De droite à gauche
+					new OpenLayers.Control.VisuGPXViewFeature (),
+					new OpenLayers.Control.SaveFeature (),
+					new OpenLayers.Control.DownloadFeature (),
+					new OpenLayers.Control.LoadFeature (),
+					new OpenLayers.Control.DeleteFeature   (editeur), // Ces contrôles ont besoin des layers pour s'initialiser
+					new OpenLayers.Control.CutFeature      (editeur),
+					new OpenLayers.Control.ModifyFeature   (editeur),
+					new OpenLayers.Control.DrawFeaturePath (editeur),
+					new OpenLayers.Control.Navigation ()
+				]);
 				map.addLayer (editeur);
 			}
 		</script>
@@ -156,7 +168,7 @@
 			<span id="titre-lon">Longitude</span>: <em id="long">xxxx</em>
 			<span id="titre-lat">Latitude</span>: <em id="lati">yyyy</em>,
 			<select id="select-proj">
-				<option>Degrés décimaux</option>
+				<option>DegrÃ©s dÃ©cimaux</option>
 			</select>
 		</p>
 		<p style="margin:0 0 0 50px">
@@ -169,7 +181,7 @@
 					<input type="text" id="lat" name="latitude" size="12" maxlength="12" />
 				</span>
 				<select id="select-projection">
-					<option>Degrés décimaux</option><?/* Initialise le champ au chargement de la page. Sera écrasé par innerHTML */?>
+					<option>DegrÃ©s dÃ©cimaux</option><?/* Initialise le champ au chargement de la page. Sera écrasé par innerHTML */?>
 				</select>
 			</form>
 		</p>
@@ -182,11 +194,7 @@
 		<hr/>
 			EDITEUR
 			<p style="margin:0 0 0 50px">
-				<a onclick="add_edit()" style="cursor:pointer">Ajouter l'éditeur de trace</a>
-			</p>
-			<p style="margin:0 0 0 50px">
-				Inclure un fichier .GPX
-				<input type="file" onchange="editeur.addFiles(this.files)" />
+				<a onclick="add_edit()" style="cursor:pointer">Ajouter l'Ã©diteur de trace</a>
 			</p>
 		<hr/>
 		Test multicartes

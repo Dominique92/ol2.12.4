@@ -22,10 +22,10 @@ DEPUIS OL12.2.1
 	OpenLayers.Control.LayerSwitcher.Conditional => OpenLayers.Control.LayerSwitcherConditional
 
 	map.params => 
-				new OpenLayers.Control.PermalinkCookies (null, null, {
-					defaut: 123,
-					force: 456,
-				}),
+		new OpenLayers.Control.PermalinkCookies (null, null, {
+			defaut: 123,
+			force: 456,
+		}),
 
 	Img => ImgPosition / ImgDrag
 
@@ -35,6 +35,20 @@ DEPUIS OL12.2.1
 	
 DEPUIS OL12.2.2 & OL12.2.3
 	AUCUNE
+	
+DEPUIS OL12.2.4
+	Il faut ajouter les controles de l'éditeur
+	editeur.addControls ([
+		new OpenLayers.Control.VisuGPXViewFeature (),
+		new OpenLayers.Control.SaveFeature (),
+		new OpenLayers.Control.DownloadFeature (),
+		new OpenLayers.Control.LoadFeature (),
+		new OpenLayers.Control.DeleteFeature (editeur),
+		new OpenLayers.Control.CutFeature (editeur),
+		new OpenLayers.Control.ModifyFeature (editeur),
+		new OpenLayers.Control.DrawFeaturePath (editeur),
+		new OpenLayers.Control.Navigation ()
+	]);
 
 /*************************************************************************************************************************************/
 ARCHITECTURE

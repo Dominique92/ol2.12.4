@@ -1,4 +1,4 @@
-<b>Openlayers.js généré sur localhost le Sat, 20 Oct 2012 22:05:12 +0200</b><br>
+<b>Openlayers.js généré sur localhost le Sun, 28 Oct 2012 22:17:41 +0100</b><br>
 Modifications par rapport à OpenLayers-2.12:<hr>
 <b>../build/OpenLayers.tmp</b><br>
 21++/if (navigator.userAgent.search (/bot|crawl|mediapartners/i) != -1) return; // Ne lance pas OL si l'agent est un robot<hr>
@@ -58,6 +58,7 @@ Modifications par rapport à OpenLayers-2.12:<hr>
 <b>OpenLayers/Control/ArgParserCookies.js</b>: <i>nouveau fichier</i><hr>
 <b>OpenLayers/Control/PermalinkCookies.js</b>: <i>nouveau fichier</i><hr>
 <b>OpenLayers/Control/LayerSwitcherConditional.js</b>: <i>nouveau fichier</i><hr>
+<b>OpenLayers/Control/FullScreen.js</b>: <i>nouveau fichier</i><hr>
 <b>../proj4js-1.1.0/lib/proj4js-combined.js</b><br>
 1506++<hr>
 <b>OpenLayers/Layer/VectorClickHover.js</b>: <i>nouveau fichier</i><hr>
@@ -75,17 +76,20 @@ Modifications par rapport à OpenLayers-2.12:<hr>
 <b>OpenLayers/Layer/SwissTopo.js</b>: <i>nouveau fichier</i><hr>
 <b>OpenLayers/Layer/IGM.js</b>: <i>nouveau fichier</i><hr>
 <b>OpenLayers/Layer/IDEE.js</b>: <i>nouveau fichier</i><hr>
-Écriture ../OpenLayers.js 549892 octets<hr>
+Écriture ../OpenLayers.js 551751 octets<hr>
 <b>OpenLayers/Control/ModifyFeature.js</b><br>
-116++<br>
-117++<br>
-222++<br>
-223++/ this.PointStyle = OpenLayers.Util.extend({}, this.virtualStyle); // Style pour les sommets<br>
-680---/                 vertex = new OpenLayers.Feature.Vector(component);<br>
-681++/                 vertex = new OpenLayers.Feature.Vector(component, null, control.PointStyle); // Nouveau style des sommets<hr>
+121++<br>
+127++<br>
+232++<br>
+233++/ this.PointStyle = OpenLayers.Util.extend({}, this.virtualStyle); // Style pour les sommets<br>
+690---/                 vertex = new OpenLayers.Feature.Vector(component);<br>
+691++/                 vertex = new OpenLayers.Feature.Vector(component, null, control.PointStyle); // Nouveau style des sommets<hr>
 <b>OpenLayers/Layer/Editor.js</b>: <i>nouveau fichier</i><hr>
-<b>OpenLayers/Control/DrawFeatureExtended.js</b>: <i>nouveau fichier</i><hr>
+<b>OpenLayers/Control/DrawFeaturePath.js</b>: <i>nouveau fichier</i><hr>
 <b>OpenLayers/Control/CutFeature.js</b>: <i>nouveau fichier</i><hr>
 <b>OpenLayers/Control/DeleteFeature.js</b>: <i>nouveau fichier</i><hr>
 <b>OpenLayers/Control/SaveFeature.js</b>: <i>nouveau fichier</i><hr>
-Écriture ../Editor.js 40532 octets<hr>
+<b>OpenLayers/Control/LoadFeature.js</b>: <i>nouveau fichier</i><hr>
+<b>OpenLayers/Control/DownloadFeature.js</b>: <i>nouveau fichier</i><hr>
+<b>OpenLayers/Control/VisuGPXViewFeature.js</b>: <i>nouveau fichier</i><hr>
+Écriture ../Editor.js 41978 octets<hr>

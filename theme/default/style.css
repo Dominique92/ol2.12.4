@@ -456,11 +456,29 @@ span.olGoogleAttribution.hybrid a, span.olGoogleAttribution.satellite a {
 .olControlEditingToolbar .olControlDeleteFeatureItemActive {
     background-position: -178px -24px;
 }
-.olControlEditingToolbar .olControlSaveFeatureItemInactive{
+.olControlEditingToolbar .olControlLoadFeatureItemInactive{
     background-position: -203px -1px;
 }
-.olControlEditingToolbar .olControlSaveFeatureItemActive {
+.olControlEditingToolbar .olControlLoadFeatureItemActive {
     background-position: -203px -24px;
+}
+.olControlEditingToolbar .olControlDownloadFeatureItemInactive{
+    background-position: -228px -1px;
+}
+.olControlEditingToolbar .olControlDownloadFeatureItemActive {
+    background-position: -228px -24px;
+}
+.olControlEditingToolbar .olControlSaveFeatureItemInactive{
+    background-position: -253px -1px;
+}
+.olControlEditingToolbar .olControlSaveFeatureItemActive {
+    background-position: -253px -24px;
+}
+.olControlEditingToolbar .olControlVisuGPXViewFeatureItemInactive{
+    background-position: -278px -1px;
+}
+.olControlEditingToolbar .olControlVisuGPXViewFeatureItemActive {
+    background-position: -278px -24px;
 }
 /*DCM Fin spécifiques pour l'éditeur */
 
@@ -482,7 +500,7 @@ span.olGoogleAttribution.hybrid a, span.olGoogleAttribution.satellite a {
 .olMap.fullscreen  {
     height: 100% !important;
     width: 100% !important;
-    position: fixed;
+    position: absolute;
     left: 0;
     top: 0;
     background: #ccc;
