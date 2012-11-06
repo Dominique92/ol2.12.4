@@ -186,7 +186,10 @@
 			</form>
 		</p>
 		<p>
-			<a onclick="viseur.centre()" style="cursor:pointer" title="Remettre le viseur au centre actuel de la carte">Recentrer le viseur sur la carte</a>
+			<a onclick="viseur.centre()" style="cursor:pointer">Recentrer le viseur sur la carte</a>
+		</p>
+		<p>
+			<a onclick="viseur.recentre()" style="cursor:pointer">Recentrer la carte sur le viseur</a>
 		</p>
 		<p>
 			<a onclick="viseur.efface()" style="cursor:pointer">Efface la position</a>

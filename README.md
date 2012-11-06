@@ -1,3 +1,10 @@
+BUG
+Workspace gpx: ne fonctionne pas (lecture / ecriture) sous FF
+Tester visu GPX avec le patch replace
+Séparer les cut des delete sommet
+
+
+
 ol2.12.4
 /*************************************************************************************************************************************/
 NOUVELLES FONCTIONNALITES
