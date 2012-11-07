@@ -444,6 +444,12 @@ span.olGoogleAttribution.hybrid a, span.olGoogleAttribution.satellite a {
 .olControlEditingToolbar .olControlModifyFeatureItemActive {
     background-position: -1px -24px;
 }
+.olControlEditingToolbar .olControlCutFeatureSummitItemInactive{
+    background-position: -128px -1px;
+}
+.olControlEditingToolbar .olControlCutFeatureSummitItemActive {
+    background-position: -128px -24px;
+}
 .olControlEditingToolbar .olControlCutFeatureItemInactive{
     background-position: -153px -1px;
 }

@@ -153,7 +153,8 @@
 					new OpenLayers.Control.DownloadFeature (),
 					new OpenLayers.Control.LoadFeature (),
 					new OpenLayers.Control.DeleteFeature   (editeur), // Ces contrôles ont besoin des layers pour s'initialiser
-					new OpenLayers.Control.CutFeature      (editeur),
+					new OpenLayers.Control.CutFeature      (editeur, {summit: false}),
+					new OpenLayers.Control.CutFeature      (editeur, {split: false}),
 					new OpenLayers.Control.ModifyFeature   (editeur),
 					new OpenLayers.Control.DrawFeaturePath (editeur),
 					new OpenLayers.Control.Navigation ()
