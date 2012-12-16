@@ -3,7 +3,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 		<script src="http://maps.google.com/maps/api/js?v=3&amp;sensor=false"></script>
-		<script type="text/javascript" src="../../lib/OpenLayers.js"></script>
+		<script type="text/javascript" src="../lib/OpenLayers.js"></script>
 		<script type="text/javascript">
 
 			var map, cadre, viseur, editeur, displayPosition;
@@ -41,12 +41,12 @@
 						new OpenLayers.Layer.WRI                 ('map.refuges.info'),
 						
 						// Demander une clé de production sur: http://pro.ign.fr/api-web => Service en ligne => S'ABONNER
-						// localhost    : exhcda64lisxsptm188n4at9
+						// localhost    : rjvdd0zkal6czbu4mop37x7r
 						// refuges.info : ev2w14tv2ez4wpypux2ael39
 						// chemineur.fr : y07s87qyij0i6yhj8nzi66ww
-						new OpenLayers.Layer.IGN                 ('IGN',          'exhcda64lisxsptm188n4at9'),
-						new OpenLayers.Layer.IGN.Photo           ('IGN photo',    'exhcda64lisxsptm188n4at9'),
-						new OpenLayers.Layer.IGN.Cadastre        ('IGN Cadastre', 'exhcda64lisxsptm188n4at9'),
+						new OpenLayers.Layer.IGN                 ('IGN',          'rjvdd0zkal6czbu4mop37x7r'),
+						new OpenLayers.Layer.IGN.Photo           ('IGN photo',    'rjvdd0zkal6czbu4mop37x7r'),
+						new OpenLayers.Layer.IGN.Cadastre        ('IGN Cadastre', 'rjvdd0zkal6czbu4mop37x7r'),
 						
 						// Automatiquement autorisé sur //localhost
 						// Demande pour autoriser le domaine à accéder aux données:
@@ -110,6 +110,9 @@
 						new OpenLayers.Control.Navigation(),
 						new OpenLayers.Control.PanZoom (),
 						new OpenLayers.Control.LayerSwitcher (),
+//						new OpenLayers.Control.LayerSwitcher ({
+//							div: OpenLayers.Util.getElement('externSwitcher')
+//						}),
 						new OpenLayers.Control.FullScreenPanel(),
 						new OpenLayers.Control.Attribution (),
 						new OpenLayers.Control.ArgParserCookies ({
@@ -127,8 +130,8 @@
 						new OpenLayers.Layer.Google.Photo        ('Google photo',  {visibility: false}),
 						new OpenLayers.Layer.OSM                 ('OSM'),
 						new OpenLayers.Layer.WRI                 ('map.refuges.info'),
-						new OpenLayers.Layer.IGN                 ('IGN', 'exhcda64lisxsptm188n4at9'),
-						new OpenLayers.Layer.SwissTopo           ('SwissTopo'),
+						new OpenLayers.Layer.IGN                 ('IGN', 'rjvdd0zkal6czbu4mop37x7r'),
+//						new OpenLayers.Layer.SwissTopo           ('SwissTopo'),
 						// Les couches superposées
 						new OpenLayers.Layer.GMLSLD ('WRI', {	
 							urlGML: OpenLayers._getScriptLocation() + 'proxy.php?url=http://www.refuges.info/exportations/exportations.php?format=gml',
@@ -138,26 +141,23 @@
 						})
 					]
 				});
+add_edit ();
 			}
 			function add_edit () {
 				editeur = new OpenLayers.Layer.Editor (
 					'Editeur', 
 					'serveur_gml.php?trace=123&', // Source GML permettant la lecture/ecriture
 					{
-						format: new OpenLayers.Format.GPX ()
+						format: new OpenLayers.Format.GPX (),
+						WWcontrols: [
+						//	new OpenLayers.Control.SaveFeature (),
+							new OpenLayers.Control.DownloadFeature (),
+							new OpenLayers.Control.LoadFeature ()
+						]
 					}
 				);
-				editeur.addControls ([ // De droite à gauche
-					new OpenLayers.Control.VisuGPXViewFeature (),
-					new OpenLayers.Control.SaveFeature (),
-					new OpenLayers.Control.DownloadFeature (),
-					new OpenLayers.Control.LoadFeature (),
-					new OpenLayers.Control.DeleteFeature   (editeur), // Ces contrôles ont besoin des layers pour s'initialiser
-					new OpenLayers.Control.CutFeature      (editeur, {summit: false}),
-					new OpenLayers.Control.CutFeature      (editeur, {split: false}),
-					new OpenLayers.Control.ModifyFeature   (editeur),
-					new OpenLayers.Control.DrawFeaturePath (editeur),
-					new OpenLayers.Control.Navigation ()
+				editeur.addControls ([
+					new OpenLayers.Control.VisuGPXViewFeature ()
 				]);
 				map.addLayer (editeur);
 			}
@@ -203,5 +203,6 @@
 		<hr/>
 		Test multicartes
 		<div id="map2" style="height:300px;width:400px"></div>
+		<div id="externSwitcher"></div>
 	</body>
 </html>
