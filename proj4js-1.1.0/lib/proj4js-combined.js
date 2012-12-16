@@ -612,6 +612,7 @@ Proj4js.Proj = Proj4js.Class({
         this.defsLoaded();
         return;
       }
+/*DCM*/alert('Projection manquante: '+this.srsCode);
 
       //else check for def on the server
       var url = Proj4js.getScriptLocation() + 'defs/' + this.srsAuth.toUpperCase() + this.srsProjNumber + '.js';

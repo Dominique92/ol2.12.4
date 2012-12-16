@@ -16,12 +16,12 @@ $fp = fopen ('OpenLayers.tmp', 'wb');
 fwrite ($fp, "/* Fichier temporaire généré automatiquement par build.php. Ne pas modifier */\n");
 fwrite ($fp, "var OpenLayers={singleFile:true};\n");
 fwrite ($fp, $openLayersJs[0]);
-fwrite ($fp, $openLayersJs[5]);
+fwrite ($fp, $openLayersJs[4]);
 fclose ($fp);
 
 // Liste de tous les fichiers à inclure
 eval ('$files ["../OpenLayers.js"] = Array ("../build/OpenLayers.tmp", ' .$openLayersJs[2] .');');
-eval ('$files ["../Editor.js"] = Array (' .$openLayersJs[3] .');');
+//eval ('$files ["../Editor.js"] = Array (' .$openLayersJs[3] .');');
 
 // D'abord remplacer provisoirement les caractères qui ne passent pas dans le compresseur
 $carspe = array (

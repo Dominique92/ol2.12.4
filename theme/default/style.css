@@ -84,6 +84,7 @@ div.olControlMousePosition {
     position: absolute;
     font-family: Arial;
     font-size: smaller;
+    background-color: #ddd; /*DCM*/
 }
 
 .olControlOverviewMapContainer {
@@ -455,12 +456,6 @@ span.olGoogleAttribution.hybrid a, span.olGoogleAttribution.satellite a {
 }
 .olControlEditingToolbar .olControlCutFeatureItemActive {
     background-position: -153px -24px;
-}
-.olControlEditingToolbar .olControlDeleteFeatureItemInactive{
-    background-position: -178px -1px;
-}
-.olControlEditingToolbar .olControlDeleteFeatureItemActive {
-    background-position: -178px -24px;
 }
 .olControlEditingToolbar .olControlLoadFeatureItemInactive{
     background-position: -203px -1px;
