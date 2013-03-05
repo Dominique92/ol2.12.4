@@ -17,6 +17,7 @@
 						new OpenLayers.Control.ScaleLine ({geodesic: true}), // L'échelle n'est pas la bonne pour les projections de type mercator. En effet, dans cette projection, le rapport nombre pixel/distance réél augmente quand on se rapproche des pôles.Pour corriger ça, un simple geodesic:yes fais l'affaire (SLY 29/11/2010)
 						new OpenLayers.Control.LayerSwitcherConditional (),
 						new OpenLayers.Control.MousePosition (),
+						new OpenLayers.Control.GPSPanel(),
 						new OpenLayers.Control.FullScreenPanel(),
 						new OpenLayers.Control.PermalinkCookies ({ // Un lien permalink conservé dans un cookie qui reporte les paramètres d'une page à l'autre
 							defaut: { // La position par défaut s'il n'y a pas de cookie ou de permalink
@@ -36,9 +37,31 @@
 						new OpenLayers.Layer.Google.Photo        ('Google photo',  {visibility: false}),
 						new OpenLayers.Layer.Google.Hybrid       ('Google hybrid', {visibility: false}),
 						
+						
+						new OpenLayers.Layer.OB( "OberBayern"),
+						
+						new OpenLayers.Layer.XYZ( "ESRI",
+//                    "http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/${z}/${y}/${x}",   
+       "http://at0.cdn.ecmaps.de/WmsGateway.ashx.jpg?Experience=oberbayern&MapStyle=KOMPASS&TileX=${x}&TileY=${y}&ZoomLevel=${z}",
+                    {sphericalMercator: true} ),
+						/*
+						new OpenLayers.Layer.XYZ( "OberBayern", 
+        // $serveur IN 0 1 2 3 
+        // $mapstyle IN 
+                      
+                     su ou t (Summer) 
+                     wi (Winter) 
+                     h (Hybrid) 
+                     a (LuftBild) 
+         // $x $y $z   Google coordinates comme d'hab. 
+						*/
+
+						
+						
+						
 						new OpenLayers.Layer.OSM                 ('OSM'),
 						new OpenLayers.Layer.Velo                ('OpenCycleMap'),
-						new OpenLayers.Layer.WRI                 ('map.refuges.info'),
+						new OpenLayers.Layer.WRI                 ('maps.refuges.info'),
 						
 						// Demander une clé de production sur: http://pro.ign.fr/api-web => Service en ligne => S'ABONNER
 						// localhost    : rjvdd0zkal6czbu4mop37x7r
@@ -61,7 +84,8 @@
 						
 						// chemineur.fr : CBE047F823B5E83CE0405F0ACA6042AB
 						new OpenLayers.Layer.OS                  ('Great Britain', 'CBE047F823B5E83CE0405F0ACA6042AB') // UK Ordonance Survey Layer
-					]
+					],
+					numZoomLevels: 22
 				});
 /*
 				if (!map.getCenter()) // Valeur par défaut si pas de permalink ni cookie
@@ -129,7 +153,7 @@
 						new OpenLayers.Layer.Google              ('Google map',    {visibility: false}), // Cachées au début sinon, apparaissent fugitivement
 						new OpenLayers.Layer.Google.Photo        ('Google photo',  {visibility: false}),
 						new OpenLayers.Layer.OSM                 ('OSM'),
-						new OpenLayers.Layer.WRI                 ('map.refuges.info'),
+						new OpenLayers.Layer.WRI                 ('maps.refuges.info'),
 						new OpenLayers.Layer.IGN                 ('IGN', 'rjvdd0zkal6czbu4mop37x7r'),
 //						new OpenLayers.Layer.SwissTopo           ('SwissTopo'),
 						// Les couches superposées
@@ -141,7 +165,7 @@
 						})
 					]
 				});
-add_edit ();
+//add_edit ();
 			}
 			function add_edit () {
 				editeur = new OpenLayers.Layer.Editor (
@@ -204,5 +228,9 @@ add_edit ();
 		Test multicartes
 		<div id="map2" style="height:300px;width:400px"></div>
 		<div id="externSwitcher"></div>
+		
+		<h1>Test d'une page avec scrool</h1>
+		<img class="photos" src="http://www.refuges.info/photos_points/16512.jpeg" alt="Photo" />
+		<img class="photos" src="http://www.refuges.info/photos_points/16511.jpeg" alt="Photo" />
 	</body>
 </html>

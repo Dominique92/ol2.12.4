@@ -1,4 +1,4 @@
-<b>Openlayers.js généré sur localhost le Sun, 16 Dec 2012 14:29:17 +0100</b><br>
+<b>Openlayers.js généré sur localhost le Tue, 05 Mar 2013 08:22:20 +0100</b><br>
 Modifications par rapport à OpenLayers-2.12:<hr>
 <b>../build/OpenLayers.tmp</b><br>
 21++/if (navigator.userAgent.search (/bot|crawl|mediapartners/i) != -1) return; // Ne lance pas OL si l'agent est un robot<hr>
@@ -26,6 +26,7 @@ Modifications par rapport à OpenLayers-2.12:<hr>
 775++/         var resolution = OpenLayers.Util.getResolutionFromScale (this.map.getScale(), this.units);<hr>
 <b>OpenLayers/Layer/OSM.js</b><br>
 62++/transitionEffect: &quot;resize&quot;,<hr>
+<b>OpenLayers/Layer/OB.js</b>: <i>nouveau fichier</i><hr>
 <b>OpenLayers/Handler/Feature.js</b><br>
 295++<hr>
 <b>OpenLayers/Control/DragFeature.js</b><br>
@@ -38,19 +39,23 @@ Modifications par rapport à OpenLayers-2.12:<hr>
 205++/	if (this.hoverSelect) {<br>
 206++/		callbacks.over = this.hoverSelectFeature;<br>
 207++/	}<br>
-334++/	if (this.handlers.feature.evt.shiftKey)<br>
-335++/		this.onShiftClick.call(this.scope, feature);<br>
-336++/	else<br>
-423++/	hoverSelectFeature: function(feature) {<br>
-424++/		if (this.hoverSelect &amp;&amp;<br>
-425++/			!this.handlers.feature.evt.shiftKey &amp;&amp;<br>
-426++/			feature.geometry.CLASS_NAME == 'OpenLayers.Geometry.LineString') {<br>
-427++/			for (i in feature.layer.selectedFeatures)<br>
-428++<br>
-429++/			if (OpenLayers.Util.indexOf (feature.layer.selectedFeatures, feature) == -1)<br>
-430++<br>
-431++/		}<br>
-432++/	},<hr>
+334++/	if (this.handlers.feature.evt.shiftKey ||<br>
+335++/		this.handlers.feature.evt.ctrlKey ||<br>
+336++/		this.handlers.feature.evt.altKey)<br>
+337++/		this.onShiftClick.call(this.scope, feature);<br>
+338++/	else<br>
+425++/	hoverSelectFeature: function(feature) {<br>
+426++/		if (this.hoverSelect &amp;&amp;<br>
+427++/			!this.handlers.feature.evt.shiftKey &amp;&amp;<br>
+428++/			!this.handlers.feature.evt.ctrlKey &amp;&amp;<br>
+429++/			!this.handlers.feature.evt.altKey &amp;&amp;<br>
+430++/			feature.geometry.CLASS_NAME == 'OpenLayers.Geometry.LineString') {<br>
+431++/			for (i in feature.layer.selectedFeatures)<br>
+432++<br>
+433++/			if (OpenLayers.Util.indexOf (feature.layer.selectedFeatures, feature) == -1)<br>
+434++<br>
+435++/		}<br>
+436++/	},<hr>
 <b>OpenLayers/Renderer/Elements.js</b><br>
 740++/			else options.isFilled = true; // Afficher les points en externalGraphic sur Opera (les titres)<hr>
 <b>OpenLayers/Renderer/VML.js</b><br>
@@ -84,6 +89,7 @@ Modifications par rapport à OpenLayers-2.12:<hr>
 <b>OpenLayers/Control/PermalinkCookies.js</b>: <i>nouveau fichier</i><hr>
 <b>OpenLayers/Control/LayerSwitcherConditional.js</b>: <i>nouveau fichier</i><hr>
 <b>OpenLayers/Control/FullScreen.js</b>: <i>nouveau fichier</i><hr>
+<b>OpenLayers/Control/GPS.js</b>: <i>nouveau fichier</i><hr>
 <b>../proj4js-1.1.0/lib/proj4js-combined.js</b><br>
 615++/alert('Projection manquante: '+this.srsCode);<br>
 1507++<hr>
@@ -112,16 +118,15 @@ Modifications par rapport à OpenLayers-2.12:<hr>
 274++/		onDblClick: function(feature, pixel) { // Double click sur un sommet<br>
 275++/			control.dblclick.apply(control, [feature, pixel]);<br>
 276++/		},<br>
-410++/	shiftClickFeature: function(feature) {},<br>
-576++/	dblclick: function(feature, pixel) {<br>
-577++/		if (this.CLASS_NAME == 'OpenLayers.Control.ModifyFeature')<br>
-578++/			this.handleKeypress ({ // Simule une touche de suppression<br>
-579++/				keyCode: this.deleteCodes[0],<br>
-580++/				xy: pixel<br>
-581++/			});<br>
-582++/	},<br>
-716---/                 vertex = new OpenLayers.Feature.Vector(component);<br>
-717++/                 vertex = new OpenLayers.Feature.Vector(component, null, control.pointStyle); // Nouveau style des sommets<hr>
+622++/	dblclick: function(feature, pixel) {<br>
+623++/		if (this.CLASS_NAME == 'OpenLayers.Control.ModifyFeature')<br>
+624++/			this.handleKeypress ({ // Simule une touche de suppression<br>
+625++/				keyCode: this.deleteCodes[0],<br>
+626++/				xy: pixel<br>
+627++/			});<br>
+628++/	},<br>
+762---/                 vertex = new OpenLayers.Feature.Vector(component);<br>
+763++/                 vertex = new OpenLayers.Feature.Vector(component, null, control.pointStyle); // Nouveau style des sommets<hr>
 <b>OpenLayers/Control/DrawFeaturePath.js</b>: <i>nouveau fichier</i><hr>
 <b>OpenLayers/Control/CutFeature.js</b>: <i>nouveau fichier</i><hr>
 <b>OpenLayers/Control/SaveFeature.js</b>: <i>nouveau fichier</i><hr>
@@ -129,4 +134,4 @@ Modifications par rapport à OpenLayers-2.12:<hr>
 <b>OpenLayers/Control/DownloadFeature.js</b>: <i>nouveau fichier</i><hr>
 <b>OpenLayers/Control/VisuGPXViewFeature.js</b>: <i>nouveau fichier</i><hr>
 <b>OpenLayers/Layer/Editor.js</b>: <i>nouveau fichier</i><hr>
-Écriture ../OpenLayers.js 594830 octets<hr>
+Écriture ../OpenLayers.js 599942 octets<hr>

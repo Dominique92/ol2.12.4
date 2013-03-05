@@ -1,61 +1,33 @@
-BUG
-Workspace gpx: ne fonctionne pas (lecture / ecriture) sous FF
-Tester visu GPX avec le patch replace
-Séparer les cut des delete sommet
+ol2.12
+======
 
-
-
-ol2.12.4
-/*************************************************************************************************************************************/
-NOUVELLES FONCTIONNALITES
-
-
-A VOIR
-http://trac.osgeo.org/openlayers/attachment/ticket/1882/DeleteFeature.js
-http://trac.osgeo.org/openlayers/ticket/1249 Baselayers multiprojections
+Améliorations apportées à Openlayers 2.12
 
 /*************************************************************************************************************************************/
 RESTRICTIONS
-L'éditeur ne fonctionne pas sous IE
 IGN & SwissTopo ne fonctionnent pas sous Opera sous localhost (restriction de sécurité de Opera). Génant en debug, pas en prod
 
 /*************************************************************************************************************************************/
-RUPTURES D'INTERFACE - MIGRATION
+Etape 1: Librairies incluses:
+	OpenLayers-2.12.zip (img lib theme license.txt): http://openlayers.org/
+	proj4js de proj4js-1.1.0.zip (lib)
+	jsmin https://github.com/rgrove/jsmin-php pour la compression de la bibliothèque (respecte le nom des variables, ce qui n'est pas optimal mais semble nécéssaire à OL)
 
-DEPUIS OL12.2.1
+Etape 2: Livraison à refuges.info
+	Patchs : Les patchs inclus sont documentés dans
+		http://trac.osgeo.org/openlayers/ticket/2349 : Add label background color and border
+		http://trac.osgeo.org/openlayers/ticket/2551 : Apply text symbolizer properties
+		http://trac.osgeo.org/openlayers/ticket/2965 : Add halo's to vector labels
+	Les lignes modifiées commencent par
+		//DC// Lignes supprimées
+		/*DC*/ Lignes supprimées
+		//DC   Commentaire
 
-	OpenLayers.MapListened => OpenLayers.Map
+	Fichiers perso:
+		proxy.php // Ecrit en PHP parceque je n'ai pas de PERL sur mon PC
+		refuges-info-sld.xml // ©Dominique.Cavailhez
 
-	OpenLayers.Control.LayerSwitcher.Conditional => OpenLayers.Control.LayerSwitcherConditional
-
-	map.params => 
-		new OpenLayers.Control.PermalinkCookies (null, null, {
-			defaut: 123,
-			force: 456,
-		}),
-
-	Img => ImgPosition / ImgDrag
-
-	displayPosition disparait => paramètres de ImgDrag
-	
-	addLayersListened => addLayers
-	
-DEPUIS OL12.2.2 & OL12.2.3
-	AUCUNE
-	
-DEPUIS OL12.2.4
-	Il faut ajouter les controles de l'éditeur
-	editeur.addControls ([
-		new OpenLayers.Control.VisuGPXViewFeature (),
-		new OpenLayers.Control.SaveFeature (),
-		new OpenLayers.Control.DownloadFeature (),
-		new OpenLayers.Control.LoadFeature (),
-		new OpenLayers.Control.DeleteFeature (editeur),
-		new OpenLayers.Control.CutFeature (editeur),
-		new OpenLayers.Control.ModifyFeature (editeur),
-		new OpenLayers.Control.DrawFeaturePath (editeur),
-		new OpenLayers.Control.Navigation ()
-	]);
+Etape 3: Evolutions
 
 /*************************************************************************************************************************************/
 ARCHITECTURE
@@ -80,25 +52,11 @@ Pour debugger, il faut inclure <script type="text/javascript" src="http://refuge
 	Elle est beaucoup plus lente mais permet de debugger dans les fichiers d'origine plus lisibles
 
 Les paramètres d'affichage de la carte mémorisés dans le cookie "Olparams" de syntaxe proche du permalink
-
+	
 /*************************************************************************************************************************************/
-Librairies incluses:
-	OpenLayers-2.12.zip (img lib theme license.txt OpenLayers.js): http://openlayers.org/
-	proj4js de proj4js-1.1.0.zip (lib)
-	jsmin https://github.com/rgrove/jsmin-php pour la compression de la bibliothèque (respecte le nom des variables, ce qui n'est pas optimal mais semble nécéssaire à OL)
-
-Patchs : Les patchs inclus sont documentés dans
-	http://trac.osgeo.org/openlayers/ticket/2349 : Add label background color and border
-	http://trac.osgeo.org/openlayers/ticket/2551 : Apply text symbolizer properties
-	http://trac.osgeo.org/openlayers/ticket/2965 : Add halo's to vector labels
-Les lignes modifiées commencent par
-	//DC// Lignes supprimées
-	/*DC*/ Lignes supprimées
-	//DC   Commentaire
-
-Fichiers perso:
-	proxy.php // Ecrit en PHP parceque je n'ai pas de PERL sur mon PC
-	refuges-info-sld.xml // ©Dominique.Cavailhez
+NOTES:
+Safari sous XP : Windows XPS Viewer Essentials Pack
+Opera sous localhost : n'envoie pas de referer
 
 /*************************************************************************************************************************************/
 TODO WRI
@@ -128,9 +86,13 @@ Italie : passer en m plutôt que degrés
 http://openpistemap.org/
 skitour = OLcoucheWFS(map, "Skitour Refuges", "skitour_refuges", sldFile, "HebergementsJeroen", true);
 
-A voir: http://lists.osgeo.org/pipermail/openlayers-users/2011-July/021502.html
-	
-/*************************************************************************************************************************************/
-NOTES:
-Safari sous XP : Windows XPS Viewer Essentials Pack
-Opera sous localhost : n'envoie pas de referer
+
+BUG
+Workspace gpx: ne fonctionne pas (lecture / ecriture) sous FF
+Tester visu GPX avec le patch replace
+Séparer les cut des delete sommet
+
+A VOIR
+http://trac.osgeo.org/openlayers/attachment/ticket/1882/DeleteFeature.js
+http://trac.osgeo.org/openlayers/ticket/1249 Baselayers multiprojections
+http://lists.osgeo.org/pipermail/openlayers-users/2011-July/021502.html

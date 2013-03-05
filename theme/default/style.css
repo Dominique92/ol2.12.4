@@ -483,25 +483,29 @@ span.olGoogleAttribution.hybrid a, span.olGoogleAttribution.satellite a {
 }
 /*DCM Fin spécifiques pour l'éditeur */
 
-/*DCM Full screen*/
+/*DCM Full screen & GPS*/
 .olControlFullScreenPanel{
     position: absolute;
     top: 4px;
     right: 4px;
-    position: absolute;
-    top: 4px;
-    right: 4px;
 }
-.olControlFullScreenItemActive {
+.olControlGPSPanel{
+    position: absolute;
+    top: 25px;
+    left: 50px;
+}
+.olControlFullScreenItemActive,
+.olControlGPSItemActive {
     background-position: 0 -25px;
 }
-.olControlFullScreenItemInactive {
+.olControlFullScreenItemInactive,
+.olControlGPSItemInactive {
     background-position: 0 0;
 }
 .olMap.fullscreen  {
     height: 100% !important;
     width: 100% !important;
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 0;
     background: #ccc;
@@ -510,13 +514,17 @@ span.olGoogleAttribution.hybrid a, span.olGoogleAttribution.satellite a {
 .olMap.offscreen  {
     display: none;
 }
-.olControlFullScreenItemActive, .olControlFullScreenItemInactive {
+.olControlFullScreenItemActive, .olControlFullScreenItemInactive,
+.olControlGPSItemActive, .olControlGPSItemInactive {
     height: 20px;
     width: 20px;
     background-image: url(img/fullscreen.png);
     cursor: pointer;
 }
-/*DCM Full screen */
+.olControlGPSItemActive, .olControlGPSItemInactive {
+    background-image: url(img/gps.png);
+}
+/*DCM Full screen & GPS*/
 
 div.olControlZoom {
     position: absolute;
