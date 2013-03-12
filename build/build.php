@@ -11,21 +11,21 @@ $openLayersJs = explode ('/*SPLIT*/', file_get_contents ('../lib/OpenLayers.js')
 // 3: ]; // etc.}
 // 4: fin
 
-// Fichier lib/OpenLayers.js tronquÃ© (pour inclusion du code aprÃ©s minification)
+// Fichier lib/OpenLayers.js tronqué (pour inclusion du code aprés minification)
 $fp = fopen ('OpenLayers.tmp', 'wb');
 $nbcar_ecrits = 0;
-$nbcar_ecrits += fwrite ($fp, "/* Fichier temporaire gÃ©nÃ©rÃ© automatiquement par build.php. Ne pas modifier */\n");
+$nbcar_ecrits += fwrite ($fp, "/* Fichier temporaire généré automatiquement par build.php. Ne pas modifier */\n");
 $nbcar_ecrits += fwrite ($fp, "var OpenLayers={singleFile:true};\n");
 $nbcar_ecrits += fwrite ($fp, $openLayersJs[0]);
 $nbcar_ecrits += fwrite ($fp, $openLayersJs[4]);
 fclose ($fp);
-echo "OpenLayers.tmp : $nbcar_ecrits caractÃ¨res Ã©crits<br>";
+echo "OpenLayers.tmp : $nbcar_ecrits caractères écrits<br>";
 
-// Liste de tous les fichiers Ã  inclure
+// Liste de tous les fichiers à inclure
 eval ('$files ["../OpenLayers.js"] = Array ("../build/OpenLayers.tmp", ' .$openLayersJs[2] .');');
 //eval ('$files ["../Editor.js"] = Array (' .$openLayersJs[3] .');');
 
-// D'abord remplacer provisoirement les caractÃ¨res qui ne passent pas dans le compresseur
+// D'abord remplacer provisoirement les caractères qui ne passent pas dans le compresseur
 $carspe = array (
 	'à' => '@AG@',
 	'é' => '@EE@',
@@ -35,15 +35,16 @@ $carspe = array (
 	'Ã ' => '@uAG@',
 	'Ã©' => '@uEE@',
 	'Ã¨' => '@uEG@',
-	'Â°' => '@uDG@',
 	'Ã¹' => '@uUG@',
+	'Ëš' => '@uDG@',
+	'@pad@' => '@pad@',
 );
 $specar = array_flip ($carspe);
 
 $log = '';
 $deb = time();
 foreach ($files AS $fn => $fs) {
-	$ol = "/* Librairie minifiÃ©e Openlayers gÃ©nÃ©rÃ©e sur {$_SERVER['SERVER_NAME']} le " .date('r')."\n\n"
+	$ol = "/* Librairie minifiée Openlayers générée sur {$_SERVER['SERVER_NAME']} le " .date('r')."\n\n"
 		 .file_get_contents ('../licenses.txt')."*/\n";
 		 
 	foreach ($fs AS $f) {
@@ -61,32 +62,32 @@ foreach ($files AS $fn => $fs) {
 			case '/*DCM++': // Nouveau fichier
 				$o .= ": <i>nouveau fichier</i>";
 				break;
-			case '//DCM//': // Lignes supprimÃ©es
+			case '//DCM//': // Lignes supprimées
 				$o .= "<br>\n$k---" .htmlspecialchars (trim (substr ($v, 6)));
 				break;
-			case '/*DCM*/': // Ligne ajoutÃ©e
+			case '/*DCM*/': // Ligne ajoutée
 				$o .= "<br>\n$k++"  .htmlspecialchars (trim (substr ($v, 6)));
 				break;
-			case '//DCM<<': // Lignes ajoutÃ©es
-				$o .= "<br>\nPlusieurs lignes ajoutÃ©es: "  .htmlspecialchars (trim (substr ($v, 6)));
+			case '//DCM<<': // Lignes ajoutées
+				$o .= "<br>\nPlusieurs lignes ajoutées: "  .htmlspecialchars (trim (substr ($v, 6)));
 				break;
 			}
 		if ($o)
 			$log .= "<b>$f</b>$o<hr>\n";
 	}
-	// Ecriture de la lib en 1 seule fois pour minimiser la durÃ©e d'indisponibilitÃ©
-	$log .= "Ã‰criture $fn ".strlen($ol)." octets<hr>\n";
+	// Ecriture de la lib en 1 seule fois pour minimiser la durée d'indisponibilité
+	$log .= "Écriture $fn ".strlen($ol)." octets<hr>\n";
 	$fp = fopen ($fn, 'wb');
 	$nbcar_ecrits = fwrite ($fp, $ol);
 	fclose ($fp);
-	echo "$fn : $nbcar_ecrits caractÃ¨res Ã©crits<br>";
+	echo "$fn : $nbcar_ecrits caractères écrits<br>";
 }
 
 $elapsed = time () - $deb;
-echo "<b>OpenLayers.js gÃ©nÃ©rÃ© en $elapsed s " .date('r') ."</b><br>\nModifications par rapport Ã  OpenLayers-$openLayersVersion:<hr>$log";
+echo "<b>OpenLayers.js généré en $elapsed s " .date('r') ."</b><br>\nModifications par rapport à OpenLayers-$openLayersVersion:<hr>$log";
 $fpl = fopen ('build.log.html', 'w');
-$nbcar_ecrits = fwrite ($fpl, "<b>Openlayers.js gÃ©nÃ©rÃ© sur {$_SERVER['SERVER_NAME']} le " .date('r') 
-	."</b><br>\nModifications par rapport Ã  OpenLayers-$openLayersVersion:<hr>\n$log");
+$nbcar_ecrits = fwrite ($fpl, "<b>Openlayers.js généré sur {$_SERVER['SERVER_NAME']} le " .date('r') 
+	."</b><br>\nModifications par rapport à OpenLayers-$openLayersVersion:<hr>\n$log");
 fclose ($fpl);
-echo "build.log.html : $nbcar_ecrits caractÃ¨res Ã©crits<br>";
+echo "build.log.html : $nbcar_ecrits caractères écrits<br>";
 ?>

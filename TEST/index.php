@@ -1,7 +1,11 @@
-<!--DCM++ © Dominique Cavailhez 2012-->
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<title>Test de la librairie modifiée Openlayers</title>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta http-equiv="Content-Script-Type" content="text/javascript" />
+
 		<script src="http://maps.google.com/maps/api/js?v=3&amp;sensor=false"></script>
 		<script type="text/javascript" src="../lib/OpenLayers.js"></script>
 		<script type="text/javascript">
@@ -114,7 +118,6 @@
 				]);
 				
 				// Crée une deuxième carte
-if(0)
 				new OpenLayers.Map ('map2', {
 					displayProjection: 'EPSG:4326', // Affichage en °
 					controls: [
@@ -175,7 +178,7 @@ if(0)
 		</script>
 	</head>
 	<body style="margin:0;padding:0">
-		<div id="map" style="height:50%;width:50%"></div>
+		<div id="map" style="height:400px;width:600px"></div>
 		<p>
 			<span id="titre-lon">Longitude</span>: <em id="long">xxxx</em>
 			<span id="titre-lat">Latitude</span>: <em id="lati">yyyy</em>,
