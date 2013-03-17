@@ -56,6 +56,7 @@
 						new OpenLayers.Layer.IDEE                ('EspaÃ±a'), 
 						new OpenLayers.Layer.IGM                 ('Italia'),
 						
+                      //new OpenLayers.Layer.Googles //DCM pour inclure le fichier
 						new OpenLayers.Layer.Google.Terrain      ('Google'),
 						new OpenLayers.Layer.Google              ('Google map',    {visibility: false}), // Cachées au début sinon, apparaissent fugitivement
 						new OpenLayers.Layer.Google.Photo        ('Google photo',  {visibility: false}),
