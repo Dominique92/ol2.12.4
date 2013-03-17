@@ -1,58 +1,114 @@
 <?php
+ini_set('error_reporting', E_ALL ^ E_NOTICE);
+ini_set('display_errors', '1');
+date_default_timezone_set('Europe/Paris');
 
 $dir = '../../vues'; // Si inclu dans refuges.info
 if (!is_dir ($dir)) $dir = '../TEST'; // Sinon, la page de test
 
 require 'jsmin-1.1.1.php';
 
+// Récupèrer les entête & pied de Openlayers.js
+$log = "<b>Openlayers.js généré sur ".$_SERVER['SERVER_NAME']." le " .date('r')."</b><br/>"
+."Modifications par rapport à OpenLayers-2.12:";
+
 $ollib = explode ('@@@', file_get_contents ('OpenLayers.js'));
+
+$olmin = "/* Librairie minifiée Openlayers générée sur {$_SERVER['SERVER_NAME']} le " .date('r')."\n\n"
+        .file_get_contents ('../licenses.txt')."*/\n"
+        ."var OpenLayers={singleFile:true};"
+        .compress ($ollib [0])
+        .compress ($ollib [1]);
 
 foreach (scandir ($dir) AS $f)
     if (is_file ($dir.'/'.$f)) {
-        preg_match_all ('/new ([A-Z|a-z|\.]*)/', file_get_contents ($dir.'/'.$f), $fs2);
-        foreach ($fs2[1] AS $classe)
+        $fc = file_get_contents ($dir.'/'.$f);
+        preg_match_all ('/new ([A-Z|a-z|\.]*)/', $fc, $fcs);
+        foreach ($fcs[1] AS $classe)
             addFile (str_replace ('.', '/', $classe).'.js');
     }
 
+// Ecriture des lib en 1 seule fois pour minimiser la durée d'indisponibilité
 $ollib [] = $ollib [1]; // On ajoute la fin du fichier
 unset ($ollib [1]);
 file_put_contents ('../lib/OpenLayers.js', $ollib);
-    
+file_put_contents ('../OpenLayers.js', $olmin);
+file_put_contents ('build.log.html', $log);
+echo $log;
+
+//------------------------------------------------------------------------------------------------
 function addFile ($fileName) {
-    global $files, $ollib;
+    $excuses = array (
+        'OpenLayers/LonLat.js',
+        'OpenLayers/Layer/IGN/Photo.js',
+        'OpenLayers/Layer/IGN/Cadastre.js',
+        'OpenLayers/Layer/SwissTopo/Siegfried.js',
+        'OpenLayers/Layer/SwissTopo/Dufour.js',
+        'OpenLayers/Layer/SwissTopo/Photo.js',
+        'OpenLayers/Layer/Google/Terrain.js',
+        'OpenLayers/Layer/Google/Photo.js',
+        'OpenLayers/Layer/Google/Hybrid.js',
+        'OpenLayers/Layer/Google/Terrain.js',
+        'OpenLayers/Layer/Google/Photo.js',
+    );
+    global $files, $ollib, $olmin, $log;
     if (is_file ('../lib/'.$fileName) && !isset ($files [$fileName]) && !strstr ($fileName, 'SingleFile')) {
         $files [$fileName] = true;
-        preg_match_all ('/@requires ([A-Z|a-z|0-9|_|\-|\/|\.]*)/', file_get_contents ('../lib/'.$fileName), $fs);
-        foreach ($fs[1] AS $f)
+        $fc = file_get_contents ('../lib/'.$fileName);
+        preg_match_all ('/@requires ([A-Z|a-z|0-9|_|\-|\/|\.]*)/', $fc, $fcs);
+        foreach ($fcs[1] AS $f)
             addFile ($f);
         $ollib [] = "'$fileName',\n";
-//*DCMM*/echo'<pre style="background-color:white">'.var_export($fileName,true).'</pre>';
+        $olmin .= compress ($fc);
+		$o = '';
+		foreach (explode ("\n", "\n$fc") AS $k => $v) {
+            $t = htmlspecialchars (trim (substr ($v, 6)));
+			switch (substr ($v, 0, 7)) {
+                case '//DCM  ': // Introduction de la modif
+                    if ($t)
+                        $o .= "<br/>\n<i>$t</i>";
+                    break;
+                case '/*DCM++': // Nouveau fichier
+                    $o .= ": <i>nouveau fichier</i>";
+                    break;
+                case '//DCM//': // Lignes supprimées
+                    $o .= "<br/>\n$k---$t";
+                    break;
+                case '/*DCM*/': // Ligne ajoutée
+                    $o .= "<br/>\n$k++$t";
+                    break;
+                case '//DCM<<': // Lignes ajoutées
+                    $o .= "<br/>\nPlusieurs lignes ajoutées: $t";
+                    break;
+			}
+        }
+		if ($o)
+			$log .= "<hr/><b>$fileName</b>$o\n";
     }
-    else if (!is_file ('../lib/'.$fileName))
-        echo'<pre style="background-color:white">ERREUR: fichier inexistant'.var_export($fileName,true).'</pre>';
+    else if (!is_file ('../lib/'.$fileName) && !in_array ($fileName, $excuses))
+        echo'<pre style="background-color:white"><b>Erreur fichier inexistant:</b> '.var_export($fileName,true).'</pre>';
 }
-    
-    
-    exit();
-        add_file ($dir.'/'.$f);
- 
-function add_file ($f,$n=0) {
-/*DCMM*/echo'<pre style="background-color:white">add_file'.var_export($f.' '.$n,true).'</pre>';
-    global $flilesChecked, $files, $ollib;
-    preg_match_all ('/@requires ([A-z|\/]*)/', file_get_contents ($f), $fs1);
-    preg_match_all (      '/new ([A-z|\.]*)/', file_get_contents ($f), $fs2);
-    foreach (array_merge ($fs1 [1], str_replace ('.', '/', $fs2 [1])) AS $fn)
-{
-        if (is_file ("../lib/$fn.js") && !isset ($flilesChecked ["../lib/$fn.js"]))
-{
-    $flilesChecked ["../lib/$fn.js"] = true;
-//if ($n < 10)
-            add_file ("../lib/$fn.js",$n+1);
-            if (strstr ($fn, 'OpenLayers/') && !strstr ($fn, 'SingleFile')) {
-                $ollib [] = "'$fn.js',\n";
-echo'<pre>'.$n.var_export("../lib/$fn.js",true).'</pre>';
-}
-}
-    }
+//------------------------------------------------------------------------------------------------
+function compress ($js) {
+    // Pour remplacer provisoirement les caractères qui ne passent pas dans le compresseur
+    $carspe = array (
+        'à' => '@AG@',
+        'é' => '@EE@',
+        'è' => '@EG@',
+        'ù' => '@UG@',
+        '°' => '@DG@',
+        'Ã ' => '@uAG@',
+        'Ã©' => '@uEE@',
+        'Ã¨' => '@uEG@',
+        'Ã¹' => '@uUG@',
+        'Ëš' => '@uDG@',
+        '@pad@' => '@pad@',
+    );
+    $specar = array_flip ($carspe);
+
+    $js = str_replace ($specar, $carspe, $js);
+    $js = utf8_decode (JSMin::minify ($js));
+    $js = str_replace ($carspe, $specar, $js);
+    return $js;
 }
 ?>
