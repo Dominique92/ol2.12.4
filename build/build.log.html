@@ -1,4 +1,4 @@
-<b>Openlayers.js généré sur localhost le Sun, 17 Mar 2013 22:43:03 +0100</b><br/>Modifications par rapport à OpenLayers-2.12:<hr/><b>OpenLayers/Map.js</b><br/>
+<b>Openlayers.js généré sur 127.0.0.3 le Wed, 20 Mar 2013 22:25:22 +0100</b><br/>Modifications par rapport à OpenLayers-2.12:<hr/><b>OpenLayers/Map.js</b><br/>
 1232++/			var previeousProjection = this.getProjection();<br/>
 1234++/			this.resolutions = this.baseLayer.resolutions;<br/>
 1248++/				var p = new OpenLayers.Projection (previeousProjection);<br/>
@@ -31,8 +31,8 @@
 858++/     textbox.style.backgroundColor = style.labelOutlineColor;
 <hr/><b>OpenLayers/Control/GPSPanel.js</b>: <i>nouveau fichier</i>
 <hr/><b>OpenLayers/Control/FullScreenPanel.js</b>: <i>nouveau fichier</i>
-<hr/><b>OpenLayers/Control/ArgParserCookies.js</b>: <i>nouveau fichier</i>
 <hr/><b>OpenLayers/Util/Cookies.js</b>: <i>nouveau fichier</i>
+<hr/><b>OpenLayers/Control/ArgParserCookies.js</b>: <i>nouveau fichier</i>
 <hr/><b>OpenLayers/Control/PermalinkCookies.js</b>: <i>nouveau fichier</i>
 <hr/><b>OpenLayers/Layer/OSM.js</b><br/>
 62++/transitionEffect: &quot;resize&quot;,
@@ -51,39 +51,8 @@
 <hr/><b>OpenLayers/Layer/OS.js</b>: <i>nouveau fichier</i>
 <hr/><b>OpenLayers/Layer/Img.js</b>: <i>nouveau fichier</i>
 <hr/><b>OpenLayers/Layer/ImgPosition.js</b>: <i>nouveau fichier</i>
-<hr/><b>OpenLayers/Layer/VectorClickHover.js</b>: <i>nouveau fichier</i>
-<hr/><b>OpenLayers/Protocol/HTTP.js</b><br/>
-514++
-<hr/><b>OpenLayers/Format/SLD/v1.js</b><br/>
-<i>Arguments manquants</i><br/>
-518++/  &quot;font-color&quot;: &quot;fontColor&quot;,<br/>
-<i>From ticket/2349</i><br/>
-521++/  &quot;label-background-color&quot;: &quot;labelBackgroundColor&quot;,<br/>
-522++/  &quot;label-x-offset&quot;: &quot;labelXOffset&quot;,<br/>
-523++/  &quot;label-y-offset&quot;: &quot;labelYOffset&quot;,<br/>
-<i>From ticket/2965</i><br/>
-526++/  &quot;font-stroke-color&quot;: &quot;fontStrokeColor&quot;,<br/>
-527++/  &quot;font-stroke-width&quot;: &quot;fontStrokeWidth&quot;,<br/>
-528++/  &quot;cursor&quot;: &quot;cursor&quot;,<br/>
-529++/  &quot;label-outline-color&quot;: &quot;labelOutlineColor&quot;,<br/>
-530++/  &quot;label-outline-width&quot;: &quot;labelOutlineWidth&quot;,
-<hr/><b>OpenLayers/Layer/GMLSLD.js</b>: <i>nouveau fichier</i>
 <hr/><b>OpenLayers/Handler/Feature.js</b><br/>
 295++
-<hr/><b>OpenLayers/Control/Dragfeature.js</b><br/>
-157++/             dblclick: this.dblclickFeature,<br/>
-351++/	dblclickFeature: function(feature) {<br/>
-352++/		this.onDblClick (this.handlers.feature.evt);<br/>
-353++/	},
-<hr/><b>OpenLayers/Layer/ImgDrag.js</b>: <i>nouveau fichier</i>
-<hr/><b>OpenLayers/Control/SaveFeature.js</b>: <i>nouveau fichier</i>
-<hr/><b>OpenLayers/Control/DownloadFeature.js</b>: <i>nouveau fichier</i>
-<hr/><b>OpenLayers/Control/LoadFeature.js</b>: <i>nouveau fichier</i>
-<hr/><b>OpenLayers/Control/DragFeature.js</b><br/>
-157++/             dblclick: this.dblclickFeature,<br/>
-351++/	dblclickFeature: function(feature) {<br/>
-352++/		this.onDblClick (this.handlers.feature.evt);<br/>
-353++/	},
 <hr/><b>OpenLayers/Control/SelectFeature.js</b><br/>
 116++/	onShiftClick: function() {},<br/>
 205++/	if (this.hoverSelect) {<br/>
@@ -105,6 +74,37 @@
 433++<br/>
 434++/		}<br/>
 435++/	},
+<hr/><b>OpenLayers/Layer/VectorClickHover.js</b>: <i>nouveau fichier</i>
+<hr/><b>OpenLayers/Protocol/HTTP.js</b><br/>
+514++
+<hr/><b>OpenLayers/Format/SLD/v1.js</b><br/>
+<i>Arguments manquants</i><br/>
+518++/  &quot;font-color&quot;: &quot;fontColor&quot;,<br/>
+<i>From ticket/2349</i><br/>
+521++/  &quot;label-background-color&quot;: &quot;labelBackgroundColor&quot;,<br/>
+522++/  &quot;label-x-offset&quot;: &quot;labelXOffset&quot;,<br/>
+523++/  &quot;label-y-offset&quot;: &quot;labelYOffset&quot;,<br/>
+<i>From ticket/2965</i><br/>
+526++/  &quot;font-stroke-color&quot;: &quot;fontStrokeColor&quot;,<br/>
+527++/  &quot;font-stroke-width&quot;: &quot;fontStrokeWidth&quot;,<br/>
+528++/  &quot;cursor&quot;: &quot;cursor&quot;,<br/>
+529++/  &quot;label-outline-color&quot;: &quot;labelOutlineColor&quot;,<br/>
+530++/  &quot;label-outline-width&quot;: &quot;labelOutlineWidth&quot;,
+<hr/><b>OpenLayers/Layer/GMLSLD.js</b>: <i>nouveau fichier</i>
+<hr/><b>OpenLayers/Control/Dragfeature.js</b><br/>
+157++/             dblclick: this.dblclickFeature,<br/>
+351++/	dblclickFeature: function(feature) {<br/>
+352++/		this.onDblClick (this.handlers.feature.evt);<br/>
+353++/	},
+<hr/><b>OpenLayers/Layer/ImgDrag.js</b>: <i>nouveau fichier</i>
+<hr/><b>OpenLayers/Control/SaveFeature.js</b>: <i>nouveau fichier</i>
+<hr/><b>OpenLayers/Control/DownloadFeature.js</b>: <i>nouveau fichier</i>
+<hr/><b>OpenLayers/Control/LoadFeature.js</b>: <i>nouveau fichier</i>
+<hr/><b>OpenLayers/Control/DragFeature.js</b><br/>
+157++/             dblclick: this.dblclickFeature,<br/>
+351++/	dblclickFeature: function(feature) {<br/>
+352++/		this.onDblClick (this.handlers.feature.evt);<br/>
+353++/	},
 <hr/><b>OpenLayers/Control/ModifyFeature.js</b><br/>
 121++<br/>
 127++<br/>

@@ -23,6 +23,9 @@ $olmin = "/* Librairie minifiée Openlayers générée sur {$_SERVER['SERVER_NAME']}
 foreach (scandir ($dir) AS $f)
     if (is_file ($dir.'/'.$f)) {
         $fc = file_get_contents ($dir.'/'.$f);
+        $fc = str_replace ('requires', 'new', $fc); // pour @requires OpenLayers/Layer/Googles.js
+        $fc = str_replace ('/', '.', $fc);
+        $fc = str_replace ('.js', '', $fc);
         preg_match_all ('/new ([A-Z|a-z|\.]*)/', $fc, $fcs);
         foreach ($fcs[1] AS $classe)
             addFile (str_replace ('.', '/', $classe).'.js');
