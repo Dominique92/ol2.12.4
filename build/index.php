@@ -8,6 +8,26 @@ if (!is_dir ($dir)) $dir = '../TEST'; // Sinon, la page de test
 
 require 'jsmin-1.1.1.php';
 
+$estDans = array (
+    'OpenLayers/Bounds.js' => 'OpenLayers/BaseTypes/Bounds.js',
+    'OpenLayers/Class.js' => 'OpenLayers/BaseTypes/Class.js',
+    'OpenLayers/Date.js' => 'OpenLayers/BaseTypes/Date.js',
+    'OpenLayers/Element.js' => 'OpenLayers/BaseTypes/Element.js',
+    'OpenLayers/LonLat.js' => 'OpenLayers/BaseTypes/LonLat.js',
+    'OpenLayers/Pixel.js' => 'OpenLayers/BaseTypes/Pixel.js',
+    'OpenLayers/Size.js' => 'OpenLayers/BaseTypes/Size.js',
+    
+    'OpenLayers/Layer/IGN/Photo.js' => 'OpenLayers/Layer/IGN.js',
+    'OpenLayers/Layer/IGN/Cadastre.js' => 'OpenLayers/Layer/IGN.js',
+    'OpenLayers/Layer/SwissTopo/Siegfried.js' => 'OpenLayers/Layer/SwissTopo.js',
+    'OpenLayers/Layer/SwissTopo/Dufour.js' => 'OpenLayers/Layer/SwissTopo.js',
+    'OpenLayers/Layer/SwissTopo/Photo.js' => 'OpenLayers/Layer/SwissTopo.js',
+    'OpenLayers/Layer/Google/Terrain.js' => 'OpenLayers/Layer/Googles.js',
+    'OpenLayers/Layer/Google/Photo.js' => 'OpenLayers/Layer/Googles.js',
+    'OpenLayers/Layer/Google/Hybrid.js' => 'OpenLayers/Layer/Googles.js',
+    'OpenLayers/Layer/Google/Terrain.js' => 'OpenLayers/Layer/Googles.js',
+);
+
 // Récupèrer les entête & pied de Openlayers.js
 $log = "<b>Openlayers.js généré sur ".$_SERVER['SERVER_NAME']." le " .date('r')."</b><br/>"
 ."Modifications par rapport à OpenLayers-2.12:";
@@ -23,9 +43,12 @@ $olmin = "/* Librairie minifiée Openlayers générée sur {$_SERVER['SERVER_NAME']}
 foreach (scandir ($dir) AS $f)
     if (is_file ($dir.'/'.$f)) {
         $fc = file_get_contents ($dir.'/'.$f);
-        $fc = str_replace ('requires', 'new', $fc); // pour @requires OpenLayers/Layer/Googles.js
+        
+        // pour @requires OpenLayers/Xxx/Yxx.js
+        $fc = str_replace ('requires', 'new', $fc); 
         $fc = str_replace ('/', '.', $fc);
         $fc = str_replace ('.js', '', $fc);
+        
         preg_match_all ('/new ([A-Z|a-z|\.]*)/', $fc, $fcs);
         foreach ($fcs[1] AS $classe)
             addFile (str_replace ('.', '/', $classe).'.js');
@@ -38,23 +61,12 @@ file_put_contents ('../lib/OpenLayers.js', $ollib);
 file_put_contents ('../OpenLayers.js', $olmin);
 file_put_contents ('build.log.html', $log);
 echo $log;
-
 //------------------------------------------------------------------------------------------------
 function addFile ($fileName) {
-    $excuses = array (
-        'OpenLayers/LonLat.js',
-        'OpenLayers/Layer/IGN/Photo.js',
-        'OpenLayers/Layer/IGN/Cadastre.js',
-        'OpenLayers/Layer/SwissTopo/Siegfried.js',
-        'OpenLayers/Layer/SwissTopo/Dufour.js',
-        'OpenLayers/Layer/SwissTopo/Photo.js',
-        'OpenLayers/Layer/Google/Terrain.js',
-        'OpenLayers/Layer/Google/Photo.js',
-        'OpenLayers/Layer/Google/Hybrid.js',
-        'OpenLayers/Layer/Google/Terrain.js',
-        'OpenLayers/Layer/Google/Photo.js',
-    );
-    global $files, $ollib, $olmin, $log;
+    global $files, $ollib, $olmin, $log, $estDans;
+    if (isset ($estDans [$fileName]))
+        $fileName = $estDans [$fileName];
+        
     if (is_file ('../lib/'.$fileName) && !isset ($files [$fileName]) && !strstr ($fileName, 'SingleFile')) {
         $files [$fileName] = true;
         $fc = file_get_contents ('../lib/'.$fileName);
@@ -88,7 +100,7 @@ function addFile ($fileName) {
 		if ($o)
 			$log .= "<hr/><b>$fileName</b>$o\n";
     }
-    else if (!is_file ('../lib/'.$fileName) && !in_array ($fileName, $excuses))
+    else if (!is_file ('../lib/'.$fileName) && (strstr ($fileName, 'OpenLayers') || strstr ($fileName, 'proj4js')))
         echo'<pre style="background-color:white"><b>Erreur fichier inexistant:</b> '.var_export($fileName,true).'</pre>';
 }
 //------------------------------------------------------------------------------------------------
