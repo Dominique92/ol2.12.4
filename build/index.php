@@ -32,8 +32,8 @@ $estDans = array (
 );
 
 // Récupèrer les entête & pied de Openlayers.js
-$log = "<b>Openlayers.js généré sur ".$_SERVER['SERVER_NAME']." le " .date('r')."</b><br/>"
-."Modifications par rapport à OpenLayers-2.12:";
+$log = "<b>Openlayers.js gÃ©nÃ©rÃ© sur ".$_SERVER['SERVER_NAME']." le " .date('r')."</b><br/>"
+."Modifications par rapport Ã OpenLayers-2.12:";
 
 $ollib = explode ('@@@', file_get_contents ('OpenLayers.js'));
 
