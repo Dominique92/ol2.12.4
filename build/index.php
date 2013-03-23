@@ -1,12 +1,22 @@
+<?='<?'?>xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+	<head>
+		<title>Génération optimisée de la librairie Openlayers modifiée</title>
+		<link rel="shortcut icon" href="/images/favicon.ico" />
+		<meta name="robots" content="none" />
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	</head>
+	<body>
 <?php
 ini_set('error_reporting', E_ALL ^ E_NOTICE);
 ini_set('display_errors', '1');
 date_default_timezone_set('Europe/Paris');
 
+require 'jsmin-1.1.1.php';
+
 $dir = '../../vues'; // Si inclu dans refuges.info
 if (!is_dir ($dir)) $dir = '../TEST'; // Sinon, la page de test
-
-require 'jsmin-1.1.1.php';
 
 $estDans = array (
     'OpenLayers/Bounds.js' => 'OpenLayers/BaseTypes/Bounds.js',
@@ -130,3 +140,5 @@ function compress ($js) {
     return $js;
 }
 ?>
+	</body>
+</html>
