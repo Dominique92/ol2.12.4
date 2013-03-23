@@ -26,6 +26,9 @@ $estDans = array (
     'OpenLayers/Layer/Google/Photo.js' => 'OpenLayers/Layer/Googles.js',
     'OpenLayers/Layer/Google/Hybrid.js' => 'OpenLayers/Layer/Googles.js',
     'OpenLayers/Layer/Google/Terrain.js' => 'OpenLayers/Layer/Googles.js',
+    
+    'OpenLayers/Control/GPSPanel.js' => 'OpenLayers/Control/GPS.js',
+    'OpenLayers/Control/FullScreenPanel.js' => 'OpenLayers/Control/FullScreen.js',
 );
 
 // Récupèrer les entête & pied de Openlayers.js

@@ -1,4 +1,4 @@
-<b>Openlayers.js généré sur 127.0.0.3 le Sat, 23 Mar 2013 11:21:24 +0100</b><br/>Modifications par rapport à OpenLayers-2.12:<hr/><b>OpenLayers/Map.js</b><br/>
+<b>Openlayers.js généré sur 127.0.0.3 le Sat, 23 Mar 2013 12:13:14 +0100</b><br/>Modifications par rapport à OpenLayers-2.12:<hr/><b>OpenLayers/Map.js</b><br/>
 1232++/			var previeousProjection = this.getProjection();<br/>
 1234++/			this.resolutions = this.baseLayer.resolutions;<br/>
 1248++/				var p = new OpenLayers.Projection (previeousProjection);<br/>
@@ -12,6 +12,7 @@
 1256++/					for (f in this.layers[l].features)<br/>
 1257++/						if (this.layers[l].features [f] .geometry)<br/>
 1258++/							this.layers[l].features [f] .geometry.transform (p ,n);
+<hr/><b>OpenLayers/Control/LayerSwitcherConditional.js</b>: <i>nouveau fichier</i>
 <hr/><b>OpenLayers/Layer.js</b><br/>
 774---/         var resolution = this.map.getResolution();<br/>
 775++/         var resolution = OpenLayers.Util.getResolutionFromScale (this.map.getScale(), this.units);
@@ -28,6 +29,28 @@
 <hr/><b>OpenLayers/Renderer/VML.js</b><br/>
 857++/ if (style.labelOutlineColor)<br/>
 858++/     textbox.style.backgroundColor = style.labelOutlineColor;
+<hr/><b>OpenLayers/Control/GPS.js</b>: <i>nouveau fichier</i>
+<hr/><b>OpenLayers/Control/FullScreen.js</b>: <i>nouveau fichier</i>
+<hr/><b>OpenLayers/Util/Cookies.js</b>: <i>nouveau fichier</i>
+<hr/><b>OpenLayers/Control/ArgParserCookies.js</b>: <i>nouveau fichier</i>
+<hr/><b>OpenLayers/Control/PermalinkCookies.js</b>: <i>nouveau fichier</i>
+<hr/><b>OpenLayers/Layer/OSM.js</b><br/>
+62++/transitionEffect: &quot;resize&quot;,
+<hr/><b>OpenLayers/Layer/Velo.js</b>: <i>nouveau fichier</i>
+<hr/><b>OpenLayers/Layer/MRI.js</b>: <i>nouveau fichier</i>
+<hr/><b>OpenLayers/Layer/IGN.js</b>: <i>nouveau fichier</i>
+<hr/><b>../proj4js-1.1.0/lib/proj4js-combined.js</b><br/>
+615++/alert('Projection manquante: '+this.srsCode);<br/>
+1507++
+<hr/><b>OpenLayers/Layer/SwissTopo.js</b>: <i>nouveau fichier</i>
+<hr/><b>OpenLayers/Layer/IDEE.js</b>: <i>nouveau fichier</i>
+<hr/><b>OpenLayers/Layer/IGM.js</b>: <i>nouveau fichier</i>
+<hr/><b>OpenLayers/Layer/Googles.js</b>: <i>nouveau fichier</i><br/>
+<i>TODO ??? OpenLayers.Layer.Google.prototype.MIN_ZOOM_LEVEL = 2;</i>
+<hr/><b>OpenLayers/Layer/OB.js</b>: <i>nouveau fichier</i>
+<hr/><b>OpenLayers/Layer/OS.js</b>: <i>nouveau fichier</i>
+<hr/><b>OpenLayers/Layer/Img.js</b>: <i>nouveau fichier</i>
+<hr/><b>OpenLayers/Layer/ImgPosition.js</b>: <i>nouveau fichier</i>
 <hr/><b>OpenLayers/Handler/Feature.js</b><br/>
 295++
 <hr/><b>OpenLayers/Control/SelectFeature.js</b><br/>
@@ -68,31 +91,40 @@
 529++/  &quot;label-outline-color&quot;: &quot;labelOutlineColor&quot;,<br/>
 530++/  &quot;label-outline-width&quot;: &quot;labelOutlineWidth&quot;,
 <hr/><b>OpenLayers/Layer/GMLSLD.js</b>: <i>nouveau fichier</i>
-<hr/><b>OpenLayers/Util/Cookies.js</b>: <i>nouveau fichier</i>
-<hr/><b>OpenLayers/Control/ArgParserCookies.js</b>: <i>nouveau fichier</i>
-<hr/><b>OpenLayers/Control/PermalinkCookies.js</b>: <i>nouveau fichier</i>
-<hr/><b>OpenLayers/Control/LayerSwitcherConditional.js</b>: <i>nouveau fichier</i>
-<hr/><b>OpenLayers/Control/GPSPanel.js</b>: <i>nouveau fichier</i>
-<hr/><b>OpenLayers/Control/FullScreenPanel.js</b>: <i>nouveau fichier</i>
-<hr/><b>OpenLayers/Layer/Googles.js</b>: <i>nouveau fichier</i><br/>
-<i>TODO ??? OpenLayers.Layer.Google.prototype.MIN_ZOOM_LEVEL = 2;</i>
-<hr/><b>OpenLayers/Layer/IGN.js</b>: <i>nouveau fichier</i>
-<hr/><b>../proj4js-1.1.0/lib/proj4js-combined.js</b><br/>
-615++/alert('Projection manquante: '+this.srsCode);<br/>
-1507++
-<hr/><b>OpenLayers/Layer/SwissTopo.js</b>: <i>nouveau fichier</i>
-<hr/><b>OpenLayers/Layer/IGM.js</b>: <i>nouveau fichier</i>
-<hr/><b>OpenLayers/Layer/IDEE.js</b>: <i>nouveau fichier</i>
-<hr/><b>OpenLayers/Layer/OSM.js</b><br/>
-62++/transitionEffect: &quot;resize&quot;,
-<hr/><b>OpenLayers/Layer/OB.js</b>: <i>nouveau fichier</i>
-<hr/><b>OpenLayers/Layer/MRI.js</b>: <i>nouveau fichier</i>
-<hr/><b>OpenLayers/Layer/Velo.js</b>: <i>nouveau fichier</i>
-<hr/><b>OpenLayers/Layer/Img.js</b>: <i>nouveau fichier</i>
-<hr/><b>OpenLayers/Layer/ImgPosition.js</b>: <i>nouveau fichier</i>
 <hr/><b>OpenLayers/Control/Dragfeature.js</b><br/>
 157++/             dblclick: this.dblclickFeature,<br/>
 351++/	dblclickFeature: function(feature) {<br/>
 352++/		this.onDblClick (this.handlers.feature.evt);<br/>
 353++/	},
 <hr/><b>OpenLayers/Layer/ImgDrag.js</b>: <i>nouveau fichier</i>
+<hr/><b>OpenLayers/Control/SaveFeature.js</b>: <i>nouveau fichier</i>
+<hr/><b>OpenLayers/Control/DownloadFeature.js</b>: <i>nouveau fichier</i>
+<hr/><b>OpenLayers/Control/LoadFeature.js</b>: <i>nouveau fichier</i>
+<hr/><b>OpenLayers/Control/DragFeature.js</b><br/>
+157++/             dblclick: this.dblclickFeature,<br/>
+351++/	dblclickFeature: function(feature) {<br/>
+352++/		this.onDblClick (this.handlers.feature.evt);<br/>
+353++/	},
+<hr/><b>OpenLayers/Control/ModifyFeature.js</b><br/>
+121++<br/>
+127++<br/>
+232++<br/>
+233++/ this.pointStyle = OpenLayers.Util.extend({}, this.virtualStyle); // Style pour les sommets<br/>
+251++<br/>
+252++<br/>
+274++/		onDblClick: function(feature, pixel) { // Double click sur un sommet<br/>
+275++/			control.dblclick.apply(control, [feature, pixel]);<br/>
+276++/		},<br/>
+622++/	dblclick: function(feature, pixel) {<br/>
+623++/		if (this.CLASS_NAME == 'OpenLayers.Control.ModifyFeature')<br/>
+624++/			this.handleKeypress ({ // Simule une touche de suppression<br/>
+625++/				keyCode: this.deleteCodes[0],<br/>
+626++/				xy: pixel<br/>
+627++/			});<br/>
+628++/	},<br/>
+762---/                 vertex = new OpenLayers.Feature.Vector(component);<br/>
+763++/                 vertex = new OpenLayers.Feature.Vector(component, null, control.pointStyle); // Nouveau style des sommets
+<hr/><b>OpenLayers/Control/CutFeature.js</b>: <i>nouveau fichier</i>
+<hr/><b>OpenLayers/Control/DrawFeaturePath.js</b>: <i>nouveau fichier</i>
+<hr/><b>OpenLayers/Layer/Editor.js</b>: <i>nouveau fichier</i>
+<hr/><b>OpenLayers/Control/VisuGPXViewFeature.js</b>: <i>nouveau fichier</i>
