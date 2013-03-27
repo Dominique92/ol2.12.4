@@ -29,8 +29,9 @@
                                 lat: 45.2,
                                 scale: 500000
                             },
-                            WWWforce: { // Les paramètres forcés dans tous les cas sauf quand on a des arguments de permalink dans l'url
-                                baseLayer: 'OSM'
+                            WWpermalink: { // Les paramètres forcés dans tous les cas sauf quand on a des arguments de permalink dans l'url
+                                baseLayer: 'OSM',
+                                scale: 500000
                             }
                         }),
                         new OpenLayers.Control.Attribution ()
