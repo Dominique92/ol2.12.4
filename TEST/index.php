@@ -57,6 +57,10 @@
                         new OpenLayers.Layer.IDEE                ('EspaÃ±a'), 
                         new OpenLayers.Layer.IGM                 ('Italia'),
                         
+                        new OpenLayers.Layer.Bing                ({name: 'Bing',        type: 'Road',             key: 'AqTGBsziZHIJYYxgivLBf0hVdrAk9mWO5cQcb8Yux8sW5M8c8opEC2lZqKR1ZZXf'}),
+                        new OpenLayers.Layer.Bing                ({name: 'Bing photo',  type: 'Aerial',           key: 'AqTGBsziZHIJYYxgivLBf0hVdrAk9mWO5cQcb8Yux8sW5M8c8opEC2lZqKR1ZZXf'}),
+                        new OpenLayers.Layer.Bing                ({name: 'Bing hybrid', type: 'AerialWithLabels', key: 'AqTGBsziZHIJYYxgivLBf0hVdrAk9mWO5cQcb8Yux8sW5M8c8opEC2lZqKR1ZZXf'}),
+                        
                         new OpenLayers.Layer.Google.Terrain      ('Google'),
                         new OpenLayers.Layer.Google              ('Google map',    {visibility: false}), // Cachées au début sinon, apparaissent fugitivement
                         new OpenLayers.Layer.Google.Photo        ('Google photo',  {visibility: false}),
