@@ -1,4 +1,4 @@
-/* Librairie minifiée Openlayers générée sur localhost le Sat, 25 May 2013 10:13:00 +0200
+/* Librairie minifiée Openlayers générée sur localhost le Sat, 25 May 2013 11:04:05 +0200
 
 © Dominique Cavailhez août 2012.
 Published under the Clear BSD license.

@@ -59,7 +59,7 @@ foreach (array ('.', $dir) AS $d)
         if (is_file ($d.'/'.$f)) {
             $fc = file_get_contents ($d.'/'.$f);
             
-            // pour requires OpenLayers/Xxx/Yxx.js
+            // pour @rëquires OpenLayers/Xxx/Yxx.js
             $fc = str_replace ('requires', 'new', $fc); 
             $fc = str_replace ('/', '.', $fc);
             $fc = str_replace ('.js', '', $fc);
