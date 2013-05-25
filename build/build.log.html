@@ -1,4 +1,4 @@
-<b>Openlayers.js généré sur localhost le Sat, 25 May 2013 11:04:05 +0200</b><br/>Modifications par rapport àOpenLayers-2.12:<hr/><b>OpenLayers/Map.js</b><br/>
+<b>Openlayers.js généré sur localhost le Sat, 25 May 2013 18:02:51 +0200</b><br/>Modifications par rapport àOpenLayers-2.12:<hr/><b>OpenLayers/Map.js</b><br/>
 672++/ this.initialized = true;<br/>
 1214---/ if (newBaseLayer != this.baseLayer) {<br/>
 1215++/ if (newBaseLayer != this.baseLayer &amp;&amp;<br/>
@@ -58,26 +58,41 @@
 <hr/><b>OpenLayers/Handler/Feature.js</b><br/>
 295++
 <hr/><b>OpenLayers/Control/SelectFeature.js</b><br/>
-116++/	onShiftClick: function() {},<br/>
-205++/	if (this.hoverSelect) {<br/>
-206++/		callbacks.over = this.hoverSelectFeature;<br/>
-207++/	}<br/>
-334++/	if (this.handlers.feature.evt.shiftKey ||<br/>
-335++/		this.handlers.feature.evt.ctrlKey ||<br/>
-336++/		this.handlers.feature.evt.altKey)<br/>
-337++/		this.onShiftClick.call(this.scope, feature);<br/>
-424++/	hoverSelectFeature: function(feature) {<br/>
-425++/		if (this.hoverSelect &amp;&amp;<br/>
-426++/			!this.handlers.feature.evt.shiftKey &amp;&amp;<br/>
-427++/			!this.handlers.feature.evt.ctrlKey &amp;&amp;<br/>
-428++/			!this.handlers.feature.evt.altKey &amp;&amp;<br/>
+116++/ onShiftClick: function() {},<br/>
+205++/ if (this.hoverSelect) {<br/>
+206++/     callbacks.over = this.hoverSelectFeature;<br/>
+207++/ }<br/>
+334++/ if (this.handlers.feature.evt.shiftKey ||<br/>
+335++/     this.handlers.feature.evt.ctrlKey ||<br/>
+336++/     this.handlers.feature.evt.altKey)<br/>
+337++/     this.onShiftClick.call(this.scope, feature);<br/>
+424++/ hoverSelectFeature: function(feature) {<br/>
+425++/     if (this.hoverSelect &amp;&amp;<br/>
+426++/         !this.handlers.feature.evt.shiftKey &amp;&amp;<br/>
+427++/         !this.handlers.feature.evt.ctrlKey &amp;&amp;<br/>
+428++/         !this.handlers.feature.evt.altKey &amp;&amp;<br/>
 429++<br/>
-430++/			for (i in feature.layer.selectedFeatures)<br/>
-431++<br/>
-432++/			if (OpenLayers.Util.indexOf (feature.layer.selectedFeatures, feature) == -1)<br/>
-433++<br/>
-434++/		}<br/>
-435++/	},
+431++/         for (f in feature.layer.selectedFeatures)<br/>
+432++<br/>
+434++<br/>
+435++/         if (feature.geometry.CLASS_NAME == 'OpenLayers.Geometry.MultiPolygon') {<br/>
+436++/             for (c in feature.geometry.components)<br/>
+437++/             if (feature.geometry.components[c].CLASS_NAME == 'OpenLayers.Geometry.Polygon') {<br/>
+438++/                 var l = new OpenLayers.Feature.Vector (<br/>
+439++/                     new OpenLayers.Geometry.LineString()<br/>
+440++/                 );<br/>
+441++/                 for (cc in  feature.geometry.components[c].components)<br/>
+442++/                     for (ccc in  feature.geometry.components[c].components[cc].components)<br/>
+443++<br/>
+444++<br/>
+445++/             }<br/>
+446++<br/>
+447++/         }<br/>
+449++<br/>
+450++/      else if (OpenLayers.Util.indexOf (feature.layer.selectedFeatures, feature) == -1)<br/>
+451++/             this.select (feature);<br/>
+452++/     }<br/>
+453++/ },
 <hr/><b>OpenLayers/Layer/VectorClickHover.js</b>: <i>nouveau fichier</i>
 <hr/><b>OpenLayers/Protocol/HTTP.js</b><br/>
 515++
