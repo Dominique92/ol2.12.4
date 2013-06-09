@@ -37,7 +37,7 @@
                         new OpenLayers.Control.Attribution ()
                     ],
                     layers: [
-                        new OpenLayers.Layer.MRI                 ('Maps.Refuges.Info'),
+//                        new OpenLayers.Layer.MRI                 ('Maps.Refuges.Info'),
                         new OpenLayers.Layer.Velo                ('OpenCycleMap'),
                         new OpenLayers.Layer.OSM                 ('OSM'),
     
