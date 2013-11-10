@@ -13,6 +13,22 @@
             var map, cadre, viseur, editeur, displayPosition;
             window.onload = function () {
                 // Crée la carte
+                map = new OpenLayers.MapDC ('map', {
+                    defaut: { // La position par défaut s'il n'y a pas de cookie ou de permalink
+                        lon: 5.7,
+                        lat: 45.2,
+                        scale: 500000
+                    },
+                    WWpermalink: { // Les paramètres forcés dans tous les cas sauf quand on a des arguments de permalink dans l'url
+                        baseLayer: 'OSM',
+                        scale: 500000
+                    }
+                },{
+                    IGN: 'rjvdd0zkal6czbu4mop37x7r',
+                    Bing: 'AqTGBsziZHIJYYxgivLBf0hVdrAk9mWO5cQcb8Yux8sW5M8c8opEC2lZqKR1ZZXf',
+                    OS: 'CBE047F823B5E83CE0405F0ACA6042AB'
+                });
+/*
                 map = new OpenLayers.Map ('map', {
                     displayProjection: 'EPSG:4326', // Affichage en °
                     controls: [
@@ -85,6 +101,7 @@
                     ],
                     numZoomLevels: 22
                 });
+*/
 /*
                 if (!map.getCenter()) // Valeur par défaut si pas de permalink ni cookie
                     map.setCenter (
