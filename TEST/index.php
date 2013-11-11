@@ -13,7 +13,7 @@
             var map, cadre, viseur, editeur, displayPosition;
             window.onload = function () {
                 // Crée la carte
-                map = new OpenLayers.MapDC ('map', {
+                map = new OpenLayers.Map.Standard ('map', {
                     defaut: { // La position par défaut s'il n'y a pas de cookie ou de permalink
                         lon: 5.7,
                         lat: 45.2,
@@ -233,6 +233,10 @@
         </p>
         <p>
             <a onclick="viseur.efface()" style="cursor:pointer">Efface la position</a>
+        </p>
+        <hr/>
+        <p>
+            <a href="../build" target="_blank">BUILD</a>
         </p>
         <hr/>
             EDITEUR
