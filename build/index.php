@@ -128,18 +128,18 @@ function addFile ($fileName) {
 function compress ($js) {
     // Pour remplacer provisoirement les caractères qui ne passent pas dans le compresseur
     $carspe = array (
-        'ô' => '@OC@',
-        'à' => '@AG@',
-        'é' => '@EE@',
-        'è' => '@EG@',
-        'ù' => '@UG@',
-        '°' => '@DG@',
-        'Ã´' => '@uOC@',
-        'Ã ' => '@uAG@',
-        'Ã©' => '@uEE@',
-        'Ã¨' => '@uEG@',
-        'Ã¹' => '@uUG@',
-        'Ëš' => '@uDG@',
+        '�' => '@OC@',
+        '�' => '@AG@',
+        '�' => '@EE@',
+        '�' => '@EG@',
+        '�' => '@UG@',
+        '�' => '@DG@',
+        'ô' => '@uOC@',
+        'à' => '@uAG@',
+        'é' => '@uEE@',
+        'è' => '@uEG@',
+        'ù' => '@uUG@',
+        '˚' => '@uDG@',
         '@pad@' => '@pad@',
     );
     $specar = array_flip ($carspe);
