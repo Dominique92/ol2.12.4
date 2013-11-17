@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 	<head>
-		<title>GÃ©nÃ©ration optimisÃ©e de la librairie Openlayers modifiÃ©e</title>
+		<title>GÃƒÂ©nÃƒÂ©ration optimisÃƒÂ©e de la librairie Openlayers modifiÃƒÂ©e</title>
 		<link rel="shortcut icon" href="/images/favicon.ico" />
 		<meta name="robots" content="none" />
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -18,7 +18,7 @@ require 'jsmin-1.1.1.php';
 $dir = '../../vues'; // Si inclu dans refuges.info
 if (!is_dir ($dir)) $dir = '../TEST'; // Sinon, la page de test
 
-// Liste des classes qui sont dans un fichier dont le nom est différent de la classe
+// Liste des classes qui sont dans un fichier dont le nom est diffÃ©rent de la classe
 $estDans = array (
     'OpenLayers/Bounds.js' => 'OpenLayers/BaseTypes/Bounds.js',
     'OpenLayers/Class.js' => 'OpenLayers/BaseTypes/Class.js',
@@ -48,13 +48,13 @@ $estDans = array (
     'OpenLayers/Control/FullScreenPanel.js' => 'OpenLayers/Control/FullScreen.js',
 );
 
-// Récupèrer les entête & pied de Openlayers.js
-$log = "<b>Openlayers.js généré sur ".$_SERVER['SERVER_NAME']." le " .date('r')."</b><br/>"
-."Modifications par rapport à OpenLayers-2.12:";
+// RÃ©cupÃ¨rer les entÃªte & pied de Openlayers.js
+$log = "<b>Openlayers.js gÃ©nÃ©rÃ© sur ".$_SERVER['SERVER_NAME']." le " .date('r')."</b><br/>"
+."Modifications par rapport Ã Â OpenLayers-2.12:";
 
 $ollib = explode ('@@@', file_get_contents ('OpenLayers.js'));
 
-$olmin = "/* Librairie minifiée Openlayers générée sur {$_SERVER['SERVER_NAME']} le " .date('r')."\n\n"
+$olmin = "/* Librairie minifiÃ©e Openlayers gÃ©nÃ©rÃ©e sur {$_SERVER['SERVER_NAME']} le " .date('r')."\n\n"
         .file_get_contents ('../licenses.txt')."*/\n"
         ."var OpenLayers={singleFile:true};"
         .compress ($ollib [0])
@@ -65,7 +65,7 @@ foreach (array ('.', $dir) AS $d)
         if (is_file ($d.'/'.$f)) {
             $fc = file_get_contents ($d.'/'.$f);
             
-            // pour @rëquires OpenLayers/Xxx/Yxx.js
+            // pour @rÃ«quires OpenLayers/Xxx/Yxx.js
             $fc = str_replace ('requires', 'new', $fc); 
             $fc = str_replace ('/', '.', $fc);
             $fc = str_replace ('.js', '', $fc);
@@ -75,7 +75,7 @@ foreach (array ('.', $dir) AS $d)
                 addFile (str_replace ('.', '/', $classe).'.js');
         }
 
-// Ecriture des lib en 1 seule fois pour minimiser la durée d'indisponibilité
+// Ecriture des lib en 1 seule fois pour minimiser la durÃ©e d'indisponibilitÃ©
 $ollib [] = $ollib [1]; // On ajoute la fin du fichier
 unset ($ollib [1]);
 file_put_contents ('../lib/OpenLayers.js', $ollib);
@@ -107,14 +107,14 @@ function addFile ($fileName) {
                 case '/*DCM++': // Nouveau fichier
                     $o .= ": <i>nouveau fichier</i>";
                     break;
-                case '//DCM//': // Lignes supprimées
+                case '//DCM//': // Lignes supprimÃ©es
                     $o .= "<br/>\n$k---$t";
                     break;
-                case '/*DCM*/': // Ligne ajoutée
+                case '/*DCM*/': // Ligne ajoutÃ©e
                     $o .= "<br/>\n$k++$t";
                     break;
-                case '//DCM<<': // Lignes ajoutées
-                    $o .= "<br/>\nPlusieurs lignes ajoutées: $t";
+                case '//DCM<<': // Lignes ajoutÃ©es
+                    $o .= "<br/>\nPlusieurs lignes ajoutÃ©es: $t";
                     break;
 			}
         }
@@ -126,20 +126,26 @@ function addFile ($fileName) {
 }
 //------------------------------------------------------------------------------------------------
 function compress ($js) {
-    // Pour remplacer provisoirement les caractères qui ne passent pas dans le compresseur
+    // Pour remplacer provisoirement les caractÃ¨res qui ne passent pas dans le compresseur
     $carspe = array (
-        '�' => '@OC@',
-        '�' => '@AG@',
-        '�' => '@EE@',
-        '�' => '@EG@',
-        '�' => '@UG@',
-        '�' => '@DG@',
-        'ô' => '@uOC@',
-        'à' => '@uAG@',
-        'é' => '@uEE@',
-        'è' => '@uEG@',
-        'ù' => '@uUG@',
-        '˚' => '@uDG@',
+        'ô' => '@OC@',
+        'à' => '@AG@',
+        'é' => '@EE@',
+        'è' => '@EG@',
+        'ù' => '@UG@',
+        '°' => '@DG@',
+        '�' => '@aOC@', // Ansi
+        '�' => '@aAG@',
+        '�' => '@aEE@',
+        '�' => '@aEG@',
+        '�' => '@aUG@',
+        '�' => '@aDG@',
+        'Ã´' => '@uOC@', // UTF8 sans BOM
+        'Ã ' => '@uAG@',
+        'Ã©' => '@uEE@',
+        'Ã¨' => '@uEG@',
+        'Ã¹' => '@uUG@',
+        'Ëš' => '@uDG@',
         '@pad@' => '@pad@',
     );
     $specar = array_flip ($carspe);
