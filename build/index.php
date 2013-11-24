@@ -2,10 +2,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 	<head>
-		<title>GÃƒÂ©nÃƒÂ©ration optimisÃƒÂ©e de la librairie Openlayers modifiÃƒÂ©e</title>
+		<title>G�n�ration optimis�e de la librairie Openlayers modifi�e</title>
 		<link rel="shortcut icon" href="/images/favicon.ico" />
 		<meta name="robots" content="none" />
-		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<meta http-equiv="Content-Type" content="text/html;charset=windows-1252" />
 	</head>
 	<body>
 <?php
@@ -18,7 +18,7 @@ require 'jsmin-1.1.1.php';
 $dir = '../../vues'; // Si inclu dans refuges.info
 if (!is_dir ($dir)) $dir = '../TEST'; // Sinon, la page de test
 
-// Liste des classes qui sont dans un fichier dont le nom est diffÃ©rent de la classe
+// Liste des classes qui sont dans un fichier dont le nom est diff�rent de la classe
 $estDans = array (
     'OpenLayers/Bounds.js' => 'OpenLayers/BaseTypes/Bounds.js',
     'OpenLayers/Class.js' => 'OpenLayers/BaseTypes/Class.js',
@@ -48,13 +48,13 @@ $estDans = array (
     'OpenLayers/Control/FullScreenPanel.js' => 'OpenLayers/Control/FullScreen.js',
 );
 
-// RÃ©cupÃ¨rer les entÃªte & pied de Openlayers.js
-$log = "<b>Openlayers.js gÃ©nÃ©rÃ© sur ".$_SERVER['SERVER_NAME']." le " .date('r')."</b><br/>"
-."Modifications par rapport Ã Â OpenLayers-2.12:";
+// R�cup�rer les ent�te & pied de Openlayers.js
+$log = "<b>Openlayers.js g�n�r� sur ".$_SERVER['SERVER_NAME']." le " .date('r')."</b><br/>"
+."Modifications par rapport �OpenLayers-2.12:";
 
 $ollib = explode ('@@@', file_get_contents ('OpenLayers.js'));
 
-$olmin = "/* Librairie minifiÃ©e Openlayers gÃ©nÃ©rÃ©e sur {$_SERVER['SERVER_NAME']} le " .date('r')."\n\n"
+$olmin = "/* Librairie minifi�e Openlayers g�n�r�e sur {$_SERVER['SERVER_NAME']} le " .date('r')."\n\n"
         .file_get_contents ('../licenses.txt')."*/\n"
         ."var OpenLayers={singleFile:true};"
         .compress ($ollib [0])
@@ -65,7 +65,7 @@ foreach (array ('.', $dir) AS $d)
         if (is_file ($d.'/'.$f)) {
             $fc = file_get_contents ($d.'/'.$f);
             
-            // pour @rÃ«quires OpenLayers/Xxx/Yxx.js
+            // pour @r�quires OpenLayers/Xxx/Yxx.js
             $fc = str_replace ('requires', 'new', $fc); 
             $fc = str_replace ('/', '.', $fc);
             $fc = str_replace ('.js', '', $fc);
@@ -75,7 +75,7 @@ foreach (array ('.', $dir) AS $d)
                 addFile (str_replace ('.', '/', $classe).'.js');
         }
 
-// Ecriture des lib en 1 seule fois pour minimiser la durÃ©e d'indisponibilitÃ©
+// Ecriture des lib en 1 seule fois pour minimiser la dur�e d'indisponibilit�
 $ollib [] = $ollib [1]; // On ajoute la fin du fichier
 unset ($ollib [1]);
 file_put_contents ('../lib/OpenLayers.js', $ollib);
@@ -98,7 +98,7 @@ function addFile ($fileName) {
         $olmin .= compress ($fc);
 		$o = '';
 		foreach (explode ("\n", "\n$fc") AS $k => $v) {
-            $t = htmlspecialchars (trim (substr ($v, 6)));
+            $t = htmlspecialchars (trim (substr ($v, 7)));
 			switch (substr ($v, 0, 7)) {
                 case '//DCM  ': // Introduction de la modif
                     if ($t)
@@ -107,14 +107,14 @@ function addFile ($fileName) {
                 case '/*DCM++': // Nouveau fichier
                     $o .= ": <i>nouveau fichier</i>";
                     break;
-                case '//DCM//': // Lignes supprimÃ©es
-                    $o .= "<br/>\n$k---$t";
+                case '//DCM//': // Lignes supprim�es
+                    $o .= "<br/>\n$k--- $t";
                     break;
-                case '/*DCM*/': // Ligne ajoutÃ©e
-                    $o .= "<br/>\n$k++$t";
+                case '/*DCM*/': // Ligne ajout�e
+                    $o .= "<br/>\n$k++ $t";
                     break;
-                case '//DCM<<': // Lignes ajoutÃ©es
-                    $o .= "<br/>\nPlusieurs lignes ajoutÃ©es: $t";
+                case '//DCM<<': // Lignes ajout�es
+                    $o .= "<br/>\nPlusieurs lignes ajout�es: $t";
                     break;
 			}
         }
