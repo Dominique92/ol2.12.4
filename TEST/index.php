@@ -30,7 +30,20 @@
                     OS: 'CBE047F823B5E83CE0405F0ACA6042AB',
                     OB: true,
                     Google: true
-                });
+                },[
+                    mri = new OpenLayers.Layer.GMLSLD ('MRI', { // Une couche au format GML et sa feuille de style SDL avec des actions de survol et de click
+                        urlGML: OpenLayers._getScriptLocation() + 'proxy.php?url=http://www.refuges.info/exportations/exportations.php?format=gml',
+                        projection: 'EPSG:4326',
+                        urlSLD: OpenLayers._getScriptLocation() + 'refuges-info-sld.xml',
+                        styleName: 'Points'
+                    }),
+                    massifs = new OpenLayers.Layer.GMLSLD ('Massifs', {    
+                        urlGML: OpenLayers._getScriptLocation() + 'proxy.php?url=http://www.refuges.info/exportations/massifs-gml.php',
+                        projection: 'EPSG:4326', // Le GML est fourni en degminsec
+                        urlSLD: OpenLayers._getScriptLocation() + 'refuges-info-sld.xml',
+                        styleName: 'Massifs'
+                    })
+                ]);
                 
                 // Les couches superposées
                 map.addLayers ([
@@ -43,18 +56,6 @@
                         },
                         idSelect: 'select-proj',
                         displayInLayerSwitcher: false
-                    }),
-                    mri = new OpenLayers.Layer.GMLSLD ('MRI', { // Une couche au format GML et sa feuille de style SDL avec des actions de survol et de click
-                        urlGML: OpenLayers._getScriptLocation() + 'proxy.php?url=http://www.refuges.info/exportations/exportations.php?format=gml',
-                        projection: 'EPSG:4326',
-                        urlSLD: OpenLayers._getScriptLocation() + 'refuges-info-sld.xml',
-                        styleName: 'Points'
-                    }),
-                    massifs = new OpenLayers.Layer.GMLSLD ('Massifs', {    
-                        urlGML: OpenLayers._getScriptLocation() + 'proxy.php?url=http://www.refuges.info/exportations/massifs-gml.php',
-                        projection: 'EPSG:4326', // Le GML est fourni en degminsec
-                        urlSLD: OpenLayers._getScriptLocation() + 'refuges-info-sld.xml',
-                        styleName: 'Massifs'
                     }),
                     viseur = new OpenLayers.Layer.ImgDrag ('Viseur', { // Une image que l'on peut déplacer et qui met à jour des éléments lon lat de la page
                         img: OpenLayers._getScriptLocation() + 'img/viseur.png', h: 30, l: 30, 
