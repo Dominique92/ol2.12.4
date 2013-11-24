@@ -3,7 +3,7 @@
     <head>
         <title>Test de la librairie modifiée Openlayers</title>
         <link rel="shortcut icon" href="openlayers.ico" />
-        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
         <meta http-equiv="Content-Style-Type" content="text/css" />
         <meta http-equiv="Content-Script-Type" content="text/javascript" />
 
@@ -11,7 +11,7 @@
         <script type="text/javascript" src="../lib/OpenLayers.js"></script>
         <script type="text/javascript">
 
-            var map, mri, cadre, viseur, editeur, displayPosition;
+            var map, mri, massifs, cadre, viseur, editeur, displayPosition;
             window.onload = function () {
                 // Crée la carte
                 map = new OpenLayers.Map.Standard ('map', {
@@ -50,7 +50,7 @@
                         urlSLD: OpenLayers._getScriptLocation() + 'refuges-info-sld.xml',
                         styleName: 'Points'
                     }),
-                    new OpenLayers.Layer.GMLSLD ('Massifs', {    
+                    massifs = new OpenLayers.Layer.GMLSLD ('Massifs', {    
                         urlGML: OpenLayers._getScriptLocation() + 'proxy.php?url=http://www.refuges.info/exportations/massifs-gml.php',
                         projection: 'EPSG:4326', // Le GML est fourni en degminsec
                         urlSLD: OpenLayers._getScriptLocation() + 'refuges-info-sld.xml',
@@ -109,6 +109,7 @@
                     'serveur_gml.php?trace=123&', // Source GML permettant la lecture/ecriture
                     {
                         format: new OpenLayers.Format.GPX (),
+                        snap: [mri],
                         WWcontrols: [
                         //    new OpenLayers.Control.SaveFeature (),
                             new OpenLayers.Control.DownloadFeature (),
