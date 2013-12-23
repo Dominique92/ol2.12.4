@@ -1,4 +1,4 @@
-/* Librairie minifiée Openlayers générée sur 127.0.0.1 le Tue, 10 Dec 2013 21:20:03 +0100
+/* Librairie minifiée Openlayers générée sur 127.0.0.1 le Mon, 23 Dec 2013 14:34:01 +0100
 
 © Dominique Cavailhez août 2012.
 Published under the Clear BSD license.
@@ -651,9 +651,9 @@ OpenLayers.Layer.OCM=OpenLayers.Class(OpenLayers.Layer.OSM,{server:'tile.opencyc
 +' | <a href="http://shop.opencyclemap.org">Shop</a>'
 +' | <a href="/gps/">GPS</a><br /><br />'
 +'<a href="http://www.thunderforest.com">Developer Information</a><img class="tf-logo" src="http://opencyclemap.org/images/tf-logo-36-inv.png"/>',CLASS_NAME:'OpenLayers.Layer.OCM'});OpenLayers.Layer.OCM.Transport=OpenLayers.Class(OpenLayers.Layer.OCM,{server:'tile2.opencyclemap.org/transport',attribution:'<b>Thunderforest Transport Map</b><br />A global public transport map<br /><br />'
-+'<a href="http://www.thunderforest.com">Developer Information</a><img class="tf-logo" src="/images/tf-logo-36-inv.png"/>',CLASS_NAME:'OpenLayers.Layer.OCM.Transport'});OpenLayers.Layer.OCM.Landscape=OpenLayers.Class(OpenLayers.Layer.OCM,{server:'tile3.opencyclemap.org/landscape',attribution:'<b>Thunderforest Landscape Map</b><br />A map style highlightning the landscape environment<br /><br />'
-+'<a href="http://www.thunderforest.com">Developer Information</a><img class="tf-logo" src="/images/tf-logo-36-inv.png"/>',CLASS_NAME:'OpenLayers.Layer.OCM.Landscape'});OpenLayers.Layer.OCM.Outdoors=OpenLayers.Class(OpenLayers.Layer.OCM,{server:'tile.thunderforest.com/outdoors',attribution:'<b>Thunderforest Outdoors Map</b><br />A world-wide map for outdoor activities<br /><br />'
-+'<a href="http://www.thunderforest.com">Developer Information</a><img class="tf-logo" src="/images/tf-logo-36-inv.png"/>',CLASS_NAME:'OpenLayers.Layer.OCM.Outdoors'});
++'<a href="http://www.thunderforest.com">Developer Information</a><img class="tf-logo" src="http://opencyclemap.org/images/tf-logo-36-inv.png"/>',CLASS_NAME:'OpenLayers.Layer.OCM.Transport'});OpenLayers.Layer.OCM.Landscape=OpenLayers.Class(OpenLayers.Layer.OCM,{server:'tile3.opencyclemap.org/landscape',attribution:'<b>Thunderforest Landscape Map</b><br />A map style highlightning the landscape environment<br /><br />'
++'<a href="http://www.thunderforest.com">Developer Information</a><img class="tf-logo" src="http://opencyclemap.org/images/tf-logo-36-inv.png"/>',CLASS_NAME:'OpenLayers.Layer.OCM.Landscape'});OpenLayers.Layer.OCM.Outdoors=OpenLayers.Class(OpenLayers.Layer.OCM,{server:'tile.thunderforest.com/outdoors',attribution:'<b>Thunderforest Outdoors Map</b><br />A world-wide map for outdoor activities<br /><br />'
++'<a href="http://www.thunderforest.com">Developer Information</a><img class="tf-logo" src="http://opencyclemap.org/images/tf-logo-36-inv.png"/>',CLASS_NAME:'OpenLayers.Layer.OCM.Outdoors'});
 OpenLayers.Layer.WMTS=OpenLayers.Class(OpenLayers.Layer.Grid,{isBaseLayer:true,version:"1.0.0",requestEncoding:"KVP",url:null,layer:null,matrixSet:null,style:null,format:"image/jpeg",tileOrigin:null,tileFullExtent:null,formatSuffix:null,matrixIds:null,dimensions:null,params:null,zoomOffset:0,serverResolutions:null,formatSuffixMap:{"image/png":"png","image/png8":"png","image/png24":"png","image/png32":"png","png":"png","image/jpeg":"jpg","image/jpg":"jpg","jpeg":"jpg","jpg":"jpg"},matrix:null,initialize:function(config){var required={url:true,layer:true,style:true,matrixSet:true};for(var prop in required){if(!(prop in config)){throw new Error("Missing property '"+prop+"' in layer configuration.");}}
 config.params=OpenLayers.Util.upperCaseObject(config.params);var args=[config.name,config.url,config.params,config];OpenLayers.Layer.Grid.prototype.initialize.apply(this,args);if(!this.formatSuffix){this.formatSuffix=this.formatSuffixMap[this.format]||this.format.split("/").pop();}
 if(this.matrixIds){var len=this.matrixIds.length;if(len&&typeof this.matrixIds[0]==="string"){var ids=this.matrixIds;this.matrixIds=new Array(len);for(var i=0;i<len;++i){this.matrixIds[i]={identifier:ids[i]};}}}},setMap:function(){OpenLayers.Layer.Grid.prototype.setMap.apply(this,arguments);this.updateMatrixProperties();},updateMatrixProperties:function(){this.matrix=this.getMatrix();if(this.matrix){if(this.matrix.topLeftCorner){this.tileOrigin=this.matrix.topLeftCorner;}
@@ -2097,7 +2097,7 @@ this.addPoint(evt.xy);this.lastUp=evt.xy;if(this.line.geometry.components.length
 this.stoppedDown=this.stopDown;this.mouseDown=false;return!this.stopUp;},finishGeometry:function(){var index=this.line.geometry.components.length-1;this.line.geometry.removeComponent(this.line.geometry.components[index]);this.removePoint();this.finalize();},dblclick:function(evt){if(!this.freehandMode(evt)){this.finishGeometry();}
 return false;},CLASS_NAME:"OpenLayers.Handler.Path"});
 OpenLayers.Control.DrawFeaturePath=OpenLayers.Class(OpenLayers.Control.DrawFeature,{initialize:function(layer,options){options=options||{};options.displayClass='olControlDrawFeaturePoint';OpenLayers.Control.DrawFeature.prototype.initialize.call(this,layer,OpenLayers.Handler.Path,options);},drawFeature:function(geometry){var layer_features=[];for(i in this.layer.features)
-layer_features[i]=this.layer.features[i];for(i in layer_features){var vertices_i=layer_features[i].geometry.getVertices();if(vertices_i.length>1){var vertices=geometry.getVertices();if(vertices_i[0].equals(vertices[0])){for(j in vertices_i)
+layer_features[i]=this.layer.features[i];for(i in layer_features){if(layer_features[i]&&layer_features[i].geometry){var vertices_i=layer_features[i].geometry.getVertices();if(vertices_i.length>1){var vertices=geometry.getVertices();if(vertices_i[0].equals(vertices[0])){for(j in vertices_i)
 if(j)
 geometry.addComponent(vertices_i[j],0);layer_features[i].destroy();}
 else if(vertices_i[0].equals(vertices[vertices.length-1])){for(j in vertices_i)
@@ -2108,7 +2108,7 @@ if(j)
 geometry.addComponent(vertices_i[vertices_i.length-1-j],0);layer_features[i].destroy();}
 else if(vertices_i[vertices_i.length-1].equals(vertices[vertices.length-1])){for(j in vertices_i)
 if(j)
-geometry.addComponent(vertices_i[j],vertices.length);layer_features[i].destroy();}}}
+geometry.addComponent(vertices_i[j],vertices.length);layer_features[i].destroy();}}}}
 OpenLayers.Control.DrawFeature.prototype.drawFeature.apply(this,arguments);},CLASS_NAME:"OpenLayers.Control.DrawFeaturePath"});
 OpenLayers.Control.Snapping=OpenLayers.Class(OpenLayers.Control,{DEFAULTS:{tolerance:10,node:true,edge:true,vertex:true},greedy:true,precedence:["node","vertex","edge"],resolution:null,geoToleranceCache:null,layer:null,feature:null,point:null,initialize:function(options){OpenLayers.Control.prototype.initialize.apply(this,[options]);this.options=options||{};if(this.options.layer){this.setLayer(this.options.layer);}
 var defaults=OpenLayers.Util.extend({},this.options.defaults);this.defaults=OpenLayers.Util.applyDefaults(defaults,this.DEFAULTS);this.setTargets(this.options.targets);if(this.targets.length===0&&this.layer){this.addTargetLayer(this.layer);}
