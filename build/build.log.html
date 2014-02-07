@@ -1,4 +1,4 @@
-<b>Openlayers.js généré sur 127.0.0.1 le Fri, 27 Dec 2013 15:25:37 +0100</b><br/>Modifications par rapport à OpenLayers-2.12:<hr/><b>OpenLayers/Map.js</b><br/>
+<b>Openlayers.js généré sur 127.0.0.1 le Fri, 07 Feb 2014 21:02:16 +0100</b><br/>Modifications par rapport à OpenLayers-2.12:<hr/><b>OpenLayers/Map.js</b><br/>
 672++ this.initialized = true;<br/>
 1214--- if (newBaseLayer != this.baseLayer) {<br/>
 1215++ if (newBaseLayer != this.baseLayer &amp;&amp;<br/>
@@ -33,6 +33,9 @@
 <hr/><b>OpenLayers/Layer/OB.js</b>: <i>nouveau fichier</i>
 <hr/><b>OpenLayers/Layer/Googles.js</b>: <i>nouveau fichier</i><br/>
 <i>TODO ??? OpenLayers.Layer.Google.prototype.MIN_ZOOM_LEVEL = 2;</i>
+<hr/><b>OpenLayers/Control/ArgParser.js</b><br/>
+<i>if (args.lat &amp;&amp; args.lon) {</i><br/>
+124++ if (args.lat != undefined &amp;&amp; args.lon != undefined) {
 <hr/><b>OpenLayers/Util/Cookies.js</b>: <i>nouveau fichier</i>
 <hr/><b>OpenLayers/Control/ArgParserCookies.js</b>: <i>nouveau fichier</i>
 <hr/><b>OpenLayers/Control/PermalinkCookies.js</b>: <i>nouveau fichier</i>
