@@ -25,7 +25,8 @@
                         scale: 500000
                     }
                 },{
-                    IGN: 'rjvdd0zkal6czbu4mop37x7r',
+//                    IGN: 'yd57ffn2xx6s42llfz3ibr93', // Localhost 8/9/10 2014. Mais pas de scan expert
+                    IGN: 'y07s87qyij0i6yhj8nzi66ww', // Chemineur
                     Bing: 'AqTGBsziZHIJYYxgivLBf0hVdrAk9mWO5cQcb8Yux8sW5M8c8opEC2lZqKR1ZZXf',
                     OS: 'CBE047F823B5E83CE0405F0ACA6042AB',
                     OB: true,
@@ -91,7 +92,7 @@
                         new OpenLayers.Layer.Google.Photo        ('Google photo',  {visibility: false}),
                         new OpenLayers.Layer.OSM                 ('OSM'),
                         new OpenLayers.Layer.MRI                 ('maps.refuges.info'),
-                        new OpenLayers.Layer.IGN                 ('IGN', 'rjvdd0zkal6czbu4mop37x7r'),
+                        new OpenLayers.Layer.IGN                 ('IGN', 'y07s87qyij0i6yhj8nzi66ww'),
 //                        new OpenLayers.Layer.SwissTopo           ('SwissTopo'),
                         // Les couches superposées
                         new OpenLayers.Layer.GMLSLD ('MRI', {    
