@@ -110,6 +110,18 @@
 //add_edit ();
             }
             function localise () {
+				var geo = new OpenLayers.Control.Geolocate ({
+					map: map
+				});
+				geo.events.register ("locationupdated", this, function (e) {
+					this.map.setCenter (e.point.transform (
+						this.map.displayProjection,
+						this.map.getProjectionObject ()
+					));
+					map.zoomToScale(2000);
+					viseur.centre();
+				});
+				geo.activate ();
             }
             function add_edit () {
                 editeur = new OpenLayers.Layer.Editor (
@@ -162,7 +174,7 @@
             <a onclick="viseur.recentre()" style="cursor:pointer">Recentrer la carte sur le viseur</a>
         </p>
         <p>
-            <a onclick="localise()" style="cursor:pointer">Va à la position GPS</a>
+            <a onclick="localise()" style="cursor:pointer">Crée un point à la position GPS</a>
         </p>
         <p>
             <a onclick="viseur.efface()" style="cursor:pointer">Efface la position</a>
