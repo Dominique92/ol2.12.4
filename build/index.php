@@ -56,7 +56,7 @@ $log = "<b>Openlayers.js généré sur ".$_SERVER['SERVER_NAME']." le " .date('r').
 
 $ollib = explode ('@@@', file_get_contents ('OpenLayers.js'));
 
-$olmin = "/* Librairie minifiée Openlayers générée sur {$_SERVER['SERVER_NAME']} le " .date('r')."\n\n"
+$olmin = "/* Librairie minimisée Openlayers générée sur {$_SERVER['SERVER_NAME']} le " .date('r')."\n\n"
         .file_get_contents ('../licenses.txt')."*/\n"
         ."var OpenLayers={singleFile:true};"
         .compress ($ollib [0])
@@ -77,13 +77,21 @@ foreach (array ('.', $dir) AS $d)
                 addFile (str_replace ('.', '/', $classe).'.js');
         }
 
-// Ecriture des lib en 1 seule fois pour minimiser la durée d'indisponibilité
-$ollib [] = $ollib [1]; // On ajoute la fin du fichier
+// On ajoute la fin du fichier
+$ollib [] = $ollib [1];
 unset ($ollib [1]);
+
+// Et l'event de fin de chargement
+$olmin .= compress ($ollib [2]);
+$ollib [] = $ollib [2];
+unset ($ollib [2]);
+
+// Ecriture des lib en 1 seule fois pour minimiser la durée d'indisponibilité
 file_put_contents ('../lib/OpenLayers.js', $ollib);
 file_put_contents ('../OpenLayers.js', $olmin);
 file_put_contents ('build.log.html', $log);
 echo $log;
+
 //------------------------------------------------------------------------------------------------
 function addFile ($fileName) {
     global $files, $ollib, $olmin, $log, $estDans;

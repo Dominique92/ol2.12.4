@@ -12,7 +12,8 @@
         <script type="text/javascript">
 
             var map, mri, massifs, cadre, viseur, editeur, displayPosition, gps;
-            window.onload = function () {
+//            window.onload = function () {
+			window.addEventListener ('ol', function () {
                 // Crée la carte
                 map = new OpenLayers.Map.Standard ('map', {
                     defaut: { // La position par défaut s'il n'y a pas de cookie ou de permalink
@@ -108,7 +109,8 @@
                     ]
                 });
 //add_edit ();
-            }
+			}, false);
+
             function localise () {
 				var geo = new OpenLayers.Control.Geolocate ({
 					map: map

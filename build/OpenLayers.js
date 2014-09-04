@@ -32,6 +32,8 @@
      * Relative path of this script.
      */
     var scriptName = (!singleFile) ? "lib/OpenLayers.js" : "OpenLayers.js";
+	if (document.readyState === "complete") //DCM Cas du chargement OL aprés la fin du chargement de la page
+		scriptName="onload/OpenLayers.js";
 
     /*
      * If window.OpenLayers isn't set when this script (OpenLayers.js) is
@@ -156,3 +158,16 @@
  * Constant: VERSION_NUMBER
  */
 OpenLayers.VERSION_NUMBER="Release 2.12";
+
+@@@
+//DCM génère un event quand OL est chargé
+if (document.readyState === 'complete')
+		window.dispatchEvent (new Event ('ol'));
+else
+	window.addEventListener (
+		'load',
+		function () {
+			window.dispatchEvent (new Event ('ol'));
+		},
+		false
+	);
