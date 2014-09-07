@@ -1,0 +1,7 @@
+Options +FollowSymLinks 
+RewriteEngine on 
+
+RewriteCond %{REQUEST_FILENAME} !-f
+# Cette bidouille permet les RewriteRule relatif aurep où est le .htaccess
+RewriteCond $1#%{REQUEST_URI} ([^#]*)#(.*?)\1$
+RewriteRule ^(.*)$ %2build/index.php [QSA,L]
