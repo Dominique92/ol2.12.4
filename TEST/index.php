@@ -12,7 +12,6 @@
         <script type="text/javascript">
 
             var map, mri, massifs, cadre, viseur, editeur, displayPosition, gps;
-//            window.onload = function () {
 			window.addEventListener ('ol', function () {
                 // Crée la carte
                 map = new OpenLayers.Map.Standard ('map', {
@@ -77,7 +76,6 @@
 //                            div: OpenLayers.Util.getElement('externSwitcher')
 //                        }),
 						new OpenLayers.Control.GPSPanel(null, {nbIteration: 1, callBack: function (p) {
-/*DCMM*/{var v=p,r='';for(i in v)r+=i+'='+(typeof v[i]=='function'?'function':typeof v[i]+' '+v[i]+' '+(v[i]&&v[i].CLASS_NAME?'('+v[i].CLASS_NAME+')':''))+"\n";alert(r)}
 						
 						}}),
                         new OpenLayers.Control.FullScreenPanel(),
@@ -97,18 +95,21 @@
                         new OpenLayers.Layer.Google.Photo        ('Google photo',  {visibility: false}),
                         new OpenLayers.Layer.OSM                 ('OSM'),
                         new OpenLayers.Layer.MRI                 ('maps.refuges.info'),
-                        new OpenLayers.Layer.IGN                 ('IGN', 'y07s87qyij0i6yhj8nzi66ww'),
+                        new OpenLayers.Layer.IGN                 ('IGN', 'y07s87qyij0i6yhj8nzi66ww')/*,
 //                        new OpenLayers.Layer.SwissTopo           ('SwissTopo'),
                         // Les couches superposées
-                        new OpenLayers.Layer.GMLSLD ('MRI', {    
+
+                        new OpenLayers.Layer.GMLSLD ('MRI', {
                             urlGML: OpenLayers._getScriptLocation() + 'proxy.php?url=http://www.refuges.info/exportations/exportations.php?format=gml',
                             projection: 'EPSG:4326',
                             urlSLD: OpenLayers._getScriptLocation() + 'refuges-info-sld.xml',
                             styleName: 'Points'
                         })
+*/
                     ]
                 });
-//add_edit ();
+				if (0<?=isset($_GET['edit'])?>)
+					add_edit ();
 			}, false);
 
             function localise () {
@@ -125,23 +126,29 @@
 				});
 				geo.activate ();
             }
-            function add_edit () {
-                editeur = new OpenLayers.Layer.Editor (
-                    'Editeur', 
+            function add_edit_GML () {
+                editeur = new OpenLayers.Layer.EditorGML (
+                    'Editor', 
                     'serveur_gml.php?trace=123&', // Source GML permettant la lecture/ecriture
                     {
-                        format: new OpenLayers.Format.GPX (),
-                        snap: [mri],
-                        WWcontrols: [
-                        //    new OpenLayers.Control.SaveFeature (),
-                            new OpenLayers.Control.DownloadFeature (),
-                            new OpenLayers.Control.LoadFeature ()
-                        ]
+                        snap: [mri]
                     }
                 );
                 editeur.addControls ([
                     new OpenLayers.Control.VisuGPXViewFeature ()
                 ]);
+                map.addLayer (editeur);
+
+            }
+            function add_edit () {
+                editeur = new OpenLayers.Layer.Editor (
+                    'Editor', 
+                    'serveur_gml.php?trace=123&', // Source GML permettant la lecture/ecriture
+                    {
+						inputElement: 'trace',
+                        snap: [mri]
+                    }
+                );
                 map.addLayer (editeur);
             }
         </script>
@@ -184,7 +191,19 @@
         <hr/>
             EDITEUR
             <p style="margin:0 0 0 50px">
-                <a onclick="add_edit()" style="cursor:pointer">Ajouter l'éditeur de trace</a>
+                <a onclick="add_edit_GML()" style="cursor:pointer">Ajouter l'éditeur de trace sur flux GML</a>
+            </p>
+            <p style="margin:0 0 0 50px">
+                <a onclick="add_edit()" style="cursor:pointer">Ajouter l'éditeur de trace sur input text</a>
+            </p>
+            <p style="margin:0 0 0 50px">
+                <span id="trace">
+5.837329101543415,45.243528389253896 5.767291259756223,45.14965902232779 5.9032470702841895,45.109935721230364 5.9691650390250555,45.20677327160095
+5.847329101543415,45.244528389253896 5.9291650390250555,45.25677327160095
+				</span>
+            </p>
+            <p style="margin:0 0 0 50px">
+                [[ <span id="Editor"></span> ]]
             </p>
         <hr/>
         <p>
