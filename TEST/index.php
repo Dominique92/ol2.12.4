@@ -129,17 +129,17 @@
             function add_edit_GML () {
                 editeur = new OpenLayers.Layer.EditorGML (
                     'Editor', 
-                    'serveur_gml.php?trace=123&', // Source GML permettant la lecture/ecriture
+                    'serveur_gml.php?trace=1234&', // Source GML permettant la lecture/ecriture
                     {snap: [mri]}
                 );
-                editeur.addControls ([
+                editeur.controls.push (
                     new OpenLayers.Control.VisuGPXViewFeature ()
-                ]);
+                );
                 map.addLayer (editeur);
 
             }
             function add_edit () {
-                editeur = new OpenLayers.Layer.Editor ({
+                editeur = new OpenLayers.Layer.Editor ('Edit', {
 					inputId: 'trace',
 					snap: [mri]
 				});
