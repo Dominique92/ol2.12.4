@@ -130,9 +130,7 @@
                 editeur = new OpenLayers.Layer.EditorGML (
                     'Editor', 
                     'serveur_gml.php?trace=123&', // Source GML permettant la lecture/ecriture
-                    {
-                        snap: [mri]
-                    }
+                    {snap: [mri]}
                 );
                 editeur.addControls ([
                     new OpenLayers.Control.VisuGPXViewFeature ()
@@ -141,14 +139,10 @@
 
             }
             function add_edit () {
-                editeur = new OpenLayers.Layer.Editor (
-                    'Editor', 
-                    'serveur_gml.php?trace=123&', // Source GML permettant la lecture/ecriture
-                    {
-						inputElement: 'trace',
-                        snap: [mri]
-                    }
-                );
+                editeur = new OpenLayers.Layer.Editor ({
+					inputId: 'trace',
+					snap: [mri]
+				});
                 map.addLayer (editeur);
             }
         </script>
@@ -201,9 +195,6 @@
 5.837329101543415,45.243528389253896 5.767291259756223,45.14965902232779 5.9032470702841895,45.109935721230364 5.9691650390250555,45.20677327160095
 5.847329101543415,45.244528389253896 5.9291650390250555,45.25677327160095
 				</span>
-            </p>
-            <p style="margin:0 0 0 50px">
-                [[ <span id="Editor"></span> ]]
             </p>
         <hr/>
         <p>
