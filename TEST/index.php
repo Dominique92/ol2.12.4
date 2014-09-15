@@ -191,10 +191,10 @@
                 <a onclick="add_edit()" style="cursor:pointer">Ajouter l'éditeur de trace sur input text</a>
             </p>
             <p style="margin:0 0 0 50px">
-                <span id="trace">
+				<input type="text" id="trace" name="v_trace" size="45" maxlength="64" value="
 5.837329101543415,45.243528389253896 5.767291259756223,45.14965902232779 5.9032470702841895,45.109935721230364 5.9691650390250555,45.20677327160095
 5.847329101543415,45.244528389253896 5.9291650390250555,45.25677327160095
-				</span>
+				" />
             </p>
         <hr/>
         <p>
