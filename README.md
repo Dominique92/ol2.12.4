@@ -69,6 +69,7 @@ taille police massifs sous IE
 /*************************************************************************************************************************************/
 TODO
 
+Centraliser les clés Openlayers.Keys []
 Bouton chargement fichier et gen GPS sur les cartes
 Bouton de recherche nom sur la carte
 Sortie du mode full screen avec ESCAPE
@@ -78,7 +79,7 @@ OpenLayers.ProxyHost = "proxy.cgi?url=";
 GMLSLD Stratégy Fixed paramétrable
 GMLSLD this.redraw (); // TODO : éviter de demander 2 fois les couches au serveur
 
- ??? clarifier defaut/params / programme dans le code
+??? clarifier defaut/params / programme dans le code
 Vérifier entres cre / cookies from page
 Mettre include API GG dans la classe
 Emettre erreur sur SLD vide ou URL KO
@@ -88,7 +89,6 @@ Italie : passer en m plutôt que degrés
 
 http://openpistemap.org/
 skitour = OLcoucheWFS(map, "Skitour Refuges", "skitour_refuges", sldFile, "HebergementsJeroen", true);
-
 
 BUG
 Workspace gpx: ne fonctionne pas (lecture / ecriture) sous FF
